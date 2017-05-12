@@ -1,4 +1,3 @@
-const request = require('request');
 const cheerio = require('cheerio')
 const URL = require('url-parse');
 const _ = require('lodash');
@@ -6,127 +5,117 @@ var ogParse = require('open-graph').parse;
 
 const Video = require('./video');
 
-const userAgent = 'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11.6) AppleWebKit/538.1 (KHTML, like Gecko) webview Safari/538.1 youku/1.2.1;IKUCID/IKU';
+const loadPage = require('./loadPage');
 
 const embed = (url) => {
+  console.info('fetching ' + url + ' ...');
+  // return loadPage(url)
+  return loadPage(url)
+    .then(function(body) {
+      return readBody(body, url);
+    });
+}
+
+const readBody = (body, url) => {
   const result = {
     videos: [],
-    url: url
+    url: url,
+    body: body
   };
 
-  const getRes = new Promise(function(resolve, reject) {
-    request({
-      url: url,
-      headers: {
-        'User-Agent': userAgent
-      }
-    }, function(err, res, body) {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(body);
-    });
-  });
+  let $ = cheerio.load(body);
 
-  console.info('fetching ' + url + ' ...');
-  return getRes.then(function(body) {
-    let $ = cheerio.load(body);
-
-    result.body = body;
-
-    try {
-      console.info('processing og...');
-      const og = ogParse(body);
-      if (og.video != null && og.video.url) {
-        if (Array.isArray(og.video.url)) {
-          for (let i = 0; i < og.video.url.length; i++) {
-            const video = new Video({
-              url: og.video.url[i],
-              width: og.video.width[i],
-              height: og.video.height[i],
-              source: { element: 'meta' }
-            });
-            result.videos.push(video);
-          }
-        } else {
+  try {
+    console.info('processing og...');
+    const og = ogParse(body);
+    if (og.video != null && og.video.url) {
+      if (Array.isArray(og.video.url)) {
+        for (let i = 0; i < og.video.url.length; i++) {
           const video = new Video({
-            url: og.video.url,
-            width: og.video.width,
-            height: og.video.height,
+            url: og.video.url[i],
+            width: og.video.width[i],
+            height: og.video.height[i],
             source: { element: 'meta' }
           });
           result.videos.push(video);
         }
+      } else {
+        const video = new Video({
+          url: og.video.url,
+          width: og.video.width,
+          height: og.video.height,
+          source: { element: 'meta' }
+        });
+        result.videos.push(video);
       }
-    } catch (err) {
-      console.info('Open Graph error: ', err);
     }
+  } catch (err) {
+    console.info('Open Graph error: ', err);
+  }
 
-    const readContentOrValue = (element) => {
-      return element.attr('content') || element.attr('value');
-    }
+  const readContentOrValue = (element) => {
+    return element.attr('content') || element.attr('value');
+  }
 
-    if ($("meta[name='twitter:player']").length > 0) {
-      const video = new Video({
-        url: readContentOrValue($("meta[name='twitter:player']")),
-        width: readContentOrValue($("meta[name='twitter:player:width']")),
-        height: readContentOrValue($("meta[name='twitter:player:height']")),
-        source: { element: 'meta', twitterPlayer: true }
-      })
-      result.videos.push(video);
-    }
+  if ($("meta[name='twitter:player']").length > 0) {
+    const video = new Video({
+      url: readContentOrValue($("meta[name='twitter:player']")),
+      width: readContentOrValue($("meta[name='twitter:player:width']")),
+      height: readContentOrValue($("meta[name='twitter:player:height']")),
+      source: { element: 'meta', twitterPlayer: true }
+    })
+    result.videos.push(video);
+  }
 
-    // Only found in Break so far...
-    if ($("meta[name='embed_video_url']").length > 0) {
-      const video = new Video({
-        url: readContentOrValue($("meta[name='embed_video_url']")),
-        thumbUrl: readContentOrValue($("meta[name='embed_video_thumb_url']")),
-        title: readContentOrValue($("meta[name='embed_video_title']")),
-        description: readContentOrValue($("meta[name='embed_video_description']")),
-        width: readContentOrValue($("meta[name='embed_video_width']")),
-        height: readContentOrValue($("meta[name='embed_video_height']")),
-        source: { element: 'meta' }
-      });
-      result.videos.push(video);
-    }
-
-    const num = $('*').length;
-    console.info('processing ' + num + ' elements...');
-
-    $('*').each(function(i, selected) {
-      readElement(this, selected, result);
+  // Only found in Break so far...
+  if ($("meta[name='embed_video_url']").length > 0) {
+    const video = new Video({
+      url: readContentOrValue($("meta[name='embed_video_url']")),
+      thumbUrl: readContentOrValue($("meta[name='embed_video_thumb_url']")),
+      title: readContentOrValue($("meta[name='embed_video_title']")),
+      description: readContentOrValue($("meta[name='embed_video_description']")),
+      width: readContentOrValue($("meta[name='embed_video_width']")),
+      height: readContentOrValue($("meta[name='embed_video_height']")),
+      source: { element: 'meta' }
     });
+    result.videos.push(video);
+  }
 
-    const originalUrlParts = _.without(new URL(url).pathname.split('/'), '');
+  const num = $('*').length;
+  console.info('processing ' + num + ' elements...');
 
-    for (let i = 0; i < result.videos.length; i++) {
-      const video = result.videos[i];
-      video.updatePathSimilarity(originalUrlParts);
-    }
-
-    // Get unique videos
-    const map = {};
-    for (let i = 0; i < result.videos.length; i++) {
-      const video = result.videos[i];
-      map[video.key] = video;
-    }
-
-    const videos = [];
-    for (let key in map) {
-      videos.push(map[key]);
-    }
-
-    // This is for testing
-    videos.reverse();
-
-    result.videos = videos.sort((a, b) => {
-      return b.priority - a.priority;
-    });
-
-    return result;
+  $('*').each(function(i, selected) {
+    readElement(this, selected, result);
   });
-}
+
+  const originalUrlParts = _.without(new URL(url).pathname.split('/'), '');
+
+  for (let i = 0; i < result.videos.length; i++) {
+    const video = result.videos[i];
+    video.updatePathSimilarity(originalUrlParts);
+  }
+
+  // Get unique videos
+  const map = {};
+  for (let i = 0; i < result.videos.length; i++) {
+    const video = result.videos[i];
+    map[video.key] = video;
+  }
+
+  const videos = [];
+  for (let key in map) {
+    videos.push(map[key]);
+  }
+
+  // This is for testing
+  videos.reverse();
+
+  result.videos = videos.sort((a, b) => {
+    return b.priority - a.priority;
+  });
+
+  return result;
+};
 
 const readElement = (element, selected, result) => {
   if (element.type === 'tag' && element.name === 'textarea') {

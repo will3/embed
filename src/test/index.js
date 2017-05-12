@@ -16,7 +16,7 @@ test('break', 'http://www.break.com/video/leeroy-jenkins-is-12-3105110', 'http:/
 test('ustream', 'http://www.ustream.tv/recorded/88992305', 'https://www.ustream.tv/embed/recorded/88992305?html5ui');
 test('metacafe', 'http://www.metacafe.com/watch/11506159/crazy-chick-let-me-see-your-phone-or-i-ll-jump', 'http://www.metacafe.com/embed/11506159/crazy-chick-let-me-see-your-phone-or-i-ll-jump/');
 
-// Porn, which I don't watch, ever
+// Porn
 test('pornhub', 'https://www.pornhub.com/view_video.php?viewkey=ph58cccc07d4dbe', 'https://www.pornhub.com/embed/ph58cccc07d4dbe');
 test('xhamster', 'https://xhamster.com/movies/7668106/sloppy_deepthroat.html', 'http://xhamster.com/xembed.php?video=7668106');
 test('youporn', 'https://www.youporn.com/watch/13747723/nubilefilms-passionate-threeway-makes-bff-squirt', 'https://www.youporn.com/embed/13747723/nubilefilms-passionate-threeway-makes-bff-squirt/');
@@ -51,8 +51,8 @@ test('xnxx', 'http://www.xnxx.com/video-d4ltdd7/0/finally_got_to_fuck_haydee_fro
 // 2 | NetFlix
 // 6 | Hulu
 // // test('tudou', 'http://www.tudou.com/programs/view/XHF3a29VldA/');
-
+// test('vine', 'https://vine.co/v/MjDj6t3rL9i');
+// 
 // Embed link is hidden in javascript
 // test('56', 'http://www.56.com/u55/v_OTI3MTA1OTY.html');
 // test('iqiyi', 'http://www.iqiyi.com/w_19rra07jg1.html');
-test('vine', 'https://vine.co/v/MjDj6t3rL9i');

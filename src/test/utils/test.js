@@ -3,7 +3,7 @@ const embed = require('../../index');
 module.exports = (name, link, expectedLink) => {
   describe(name, function() {
     it(name, function(done) {
-      this.timeout(60000);
+      this.timeout(20000);
 
       embed(link).then(function(result) {
         if (result.videos.length === 0) {
