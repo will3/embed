@@ -82,12 +82,12 @@ const embed = (url, callback) => {
 }
 
 const readHTML = (url, result, callback) => {
-  console.log('fetching ' + url + ' ...');
+  console.info('fetching ' + url + ' ...');
   c.queue({
     uri: url,
     callback: function(err, res, done) {
       if (err) {
-        console.log(err);
+        console.info(err);
         callback(err);
         return;
       }
@@ -97,7 +97,7 @@ const readHTML = (url, result, callback) => {
       result.body = res.body;
 
       try {
-        console.log('processing og...');
+        console.info('processing og...');
         const og = ogParse(res.body);
         if (og.video != null && og.video.url) {
           if (Array.isArray(og.video.url)) {
@@ -121,7 +121,7 @@ const readHTML = (url, result, callback) => {
           }
         }
       } catch (err) {
-        console.log('Open Graph error: ', err);
+        console.info('Open Graph error: ', err);
       }
 
       const readContentOrValue = (element) => {
@@ -153,7 +153,7 @@ const readHTML = (url, result, callback) => {
       }
 
       const num = $('*').length;
-      console.log('processing ' + num + ' elements...');
+      console.info('processing ' + num + ' elements...');
 
       $('*').each(function(i, selected) {
         readElement(this, selected, result);
