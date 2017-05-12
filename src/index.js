@@ -32,7 +32,7 @@ const embed = (url, callback) => {
 }
 
 const readHTML = (url, result, callback) => {
-  console.log('fetching body...');
+  console.log('fetching ' + url + '...');
   c.queue({
     uri: url,
     callback: function(err, res, done) {
@@ -155,17 +155,15 @@ const readString = (value, result) => {
   }
 }
 
-const readScript = (script) => {
-  console.log(script);
-
-  const quotedStrings = (script.match(/"[^"\\]*(?:\\.[^"\\]*)*"/g) || []).map((string) => {
-    return string.substring(1, string.length - 2);
-  });
-  const singleQuotedStrings = (script.match(/'[^'\\]*(?:\\.[^'\\]*)*'/g) || []).map((string) => {
-    return string.substring(1, string.length - 2);
+const readScript = (script, result) => {
+  const quotedStrings = (script.match(/"[^"\\]*(?:\\.[^"\\]*)*"/g) || []).forEach((string) => {
+    string = string.substring(1, string.length - 2);
+    readString(string, result);
   });
 
-  console.log(quotedStrings);
-  console.log(singleQuotedStrings);
+  const singleQuotedStrings = (script.match(/'[^'\\]*(?:\\.[^'\\]*)*'/g) || []).forEach((string) => {
+    string = string.substring(1, string.length - 2);
+    readString(string, result);
+  });
 }
 module.exports = embed;

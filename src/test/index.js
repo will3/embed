@@ -13,8 +13,8 @@ const test = require('./utils/test');
 // test('dailymotion', 'http://www.dailymotion.com/video/x5lvnhf_nick-puts-pressure-on-theresa-may-over-if-she-ll-put-taxes-up_news');
 // test('twitch', 'https://www.twitch.tv/speedgaming');
 // test('dailymotion', 'http://www.dailymotion.com/video/x5lvh28_emirates-airline-profits-down-82-5-on-last-year_news');
-test('liveleak', 'https://www.liveleak.com/view?i=6eb_1494537998');
-// 9 | LiveLeak
+// test('liveleak', 'https://www.liveleak.com/view?i=6eb_1494537998');
+test('vine', 'https://vine.co/v/MjDj6t3rL9i');
 // 10 | Vine
 // 11 | UStream
 // 12 | Break
