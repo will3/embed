@@ -4,9 +4,7 @@ module.exports = (name, link, expectedLink) => {
   describe(name, function() {
     it(name, function(done) {
       this.timeout(60000);
-      embed(link, function(err, result) {
-        if (err) { throw err; }
-
+      embed(link).then(function(result) {
         if (result.videos.length === 0) {
           throw new Error('no way to embed ' + result.url);
         }
@@ -23,7 +21,7 @@ module.exports = (name, link, expectedLink) => {
           }
 
           if (result.videos[0].priority === 0) {
-            throw new Error('expected link has a priority of 0: ' + expectedLink);            
+            throw new Error('expected link has a priority of 0: ' + expectedLink);
           }
 
           if (result.videos[1] != null && result.videos[0].priority === result.videos[1].priority) {
@@ -32,6 +30,9 @@ module.exports = (name, link, expectedLink) => {
         }
 
         done();
+      }).catch(function(err) {
+        setTimeout(function() {
+          throw err; });
       });
     });
   });
