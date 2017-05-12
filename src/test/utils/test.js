@@ -4,10 +4,10 @@ const validateResult = require('./validateresult');
 module.exports = (name, link) => {
   describe(name, function() {
     it(name, function(done) {
-      this.timeout(20000);
+      this.timeout(60000);
       embed(link, function(err, result) {
-        console.log(err, result);
         validateResult(err, result);
+        console.log(result.videos);
         done();
       });
     });
