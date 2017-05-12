@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^0.22.0",
-    "crawler": "^1.0.5",
     "jaccard": "^0.4.0",
     "jaccard-index": "^0.2.0",
     "lodash": "^4.17.4",

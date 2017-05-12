@@ -1,18 +1,12 @@
 const request = require('request');
 const cheerio = require('cheerio')
 const URL = require('url-parse');
-var Crawler = require("crawler");
 const _ = require('lodash');
 var ogParse = require('open-graph').parse;
 
 const Video = require('./video');
 
 const userAgent = 'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11.6) AppleWebKit/538.1 (KHTML, like Gecko) webview Safari/538.1 youku/1.2.1;IKUCID/IKU';
-
-const c = new Crawler({
-  maxConnections: 10,
-  userAgent: userAgent
-});
 
 const embed = (url) => {
   const result = {
@@ -21,27 +15,29 @@ const embed = (url) => {
   };
 
   const getRes = new Promise(function(resolve, reject) {
-    c.queue({
-      uri: url,
-      callback: function(err, res, done) {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(res);
+    request({
+      url: url,
+      headers: {
+        'User-Agent': userAgent
       }
+    }, function(err, res, body) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(body);
     });
   });
 
   console.info('fetching ' + url + ' ...');
-  return getRes.then(function(res) {
-    let $ = res.$;
+  return getRes.then(function(body) {
+    let $ = cheerio.load(body);
 
-    result.body = res.body;
+    result.body = body;
 
     try {
       console.info('processing og...');
-      const og = ogParse(res.body);
+      const og = ogParse(body);
       if (og.video != null && og.video.url) {
         if (Array.isArray(og.video.url)) {
           for (let i = 0; i < og.video.url.length; i++) {
