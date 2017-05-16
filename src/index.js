@@ -6,13 +6,11 @@ var ogParse = require('open-graph').parse;
 const Video = require('./video');
 
 const loadPage = require('./loadpage');;
-const simulatePage = require('./simulatepage');
 
 const embed = (url) => {
   console.info('fetching ' + url + ' ...');
 
-  // return loadPage(url)
-  return simulatePage(url)
+  return loadPage(url)
     .then(function(loadResult) {
       return readBody(loadResult, url);
     });
