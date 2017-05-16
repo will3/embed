@@ -25,6 +25,7 @@ class Video {
   get priority() {
     let value = 0;
 
+    // Rules
     if (this.source.element === 'meta') {
       value += 100;
     }
@@ -37,10 +38,16 @@ class Video {
       value += 10;
     }
 
+    if (this.source.automation) {
+      value += 10;
+    }
+
+    // Qualitative
     if (this.width > 0 && this.height > 0) {
       value += 1;
     }
 
+    // Heuristics
     const url = new URL(this.url);
     if (url.pathname.indexOf('embed') !== -1) {
       value += 1;

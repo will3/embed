@@ -5,18 +5,21 @@ var ogParse = require('open-graph').parse;
 
 const Video = require('./video');
 
-const loadPage = require('./loadPage');
+const loadPage = require('./loadpage');;
+const simulatePage = require('./simulatepage');
 
 const embed = (url) => {
   console.info('fetching ' + url + ' ...');
+
   // return loadPage(url)
-  return loadPage(url)
-    .then(function(body) {
-      return readBody(body, url);
+  return simulatePage(url)
+    .then(function(loadResult) {
+      return readBody(loadResult, url);
     });
 }
 
-const readBody = (body, url) => {
+const readBody = (loadResult, url) => {
+  const body = loadResult.content;
   const result = {
     videos: [],
     url: url,
@@ -24,6 +27,12 @@ const readBody = (body, url) => {
   };
 
   let $ = cheerio.load(body);
+
+  (loadResult.clues || []).forEach(function(clue) {
+    if (clue.type === 'string') {
+      readString(clue.value, result, clue.source);
+    }
+  });
 
   try {
     console.info('processing og...');
@@ -120,7 +129,9 @@ const readBody = (body, url) => {
 const readElement = (element, selected, result) => {
   if (element.type === 'tag' && element.name === 'textarea') {
     const html = cheerio(element).html();
-    readString(html, result, 'textarea');
+    readString(html, result, {
+      element: 'textarea'
+    });
   }
 
   if (element.type === 'script' && element.name === 'script') {
