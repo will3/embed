@@ -8,8 +8,6 @@ const Video = require('./video');
 const loadPage = require('./loadpage');;
 
 const embed = (url) => {
-  console.info('fetching ' + url + ' ...');
-
   return loadPage(url)
     .then(function(loadResult) {
       return readBody(loadResult, url);
@@ -33,7 +31,6 @@ const readBody = (loadResult, url) => {
   });
 
   try {
-    console.info('processing og...');
     const og = ogParse(body);
     if (og.video != null && og.video.url) {
       if (Array.isArray(og.video.url)) {
@@ -57,7 +54,7 @@ const readBody = (loadResult, url) => {
       }
     }
   } catch (err) {
-    console.info('Open Graph error: ', err);
+    // TODO
   }
 
   const readContentOrValue = (element) => {
@@ -89,8 +86,6 @@ const readBody = (loadResult, url) => {
   }
 
   const num = $('*').length;
-  console.info('processing ' + num + ' elements...');
-
   $('*').each(function(i, selected) {
     readElement(this, selected, result);
   });

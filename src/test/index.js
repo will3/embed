@@ -1,9 +1,8 @@
 const test = require('./utils/test');
 
 // Normal - Chinese
-test('ku6', 'http://v.ku6.com/show/GfXfl4ywPhpoTWIHaNGdQQ...html', 'http://player.ku6.com/refer/GfXfl4ywPhpoTWIHaNGdQQ../v.swf');
-// test('sohu', 'http://tv.sohu.com/20151224/n432381576.shtml', 'http://share.vrs.sohu.com/2798175/v.swf&autoplay=false');
-// test('youku', 'http://v.youku.com/v_show/id_XMjcyMTA3MjM5Ng', 'http://player.youku.com/embed/XMjcyMTA3MjM5Ng==');
+test('sohu', 'http://tv.sohu.com/20151224/n432381576.shtml', 'http://share.vrs.sohu.com/2798175/v.swf&autoplay=false');
+test('youku', 'http://v.youku.com/v_show/id_XMjcyMTA3MjM5Ng', 'http://player.youku.com/embed/XMjcyMTA3MjM5Ng==');
 
 // // Normal
 // test('youtube', 'https://www.youtube.com/watch?v=BBauxerc6TI', 'https://www.youtube.com/embed/BBauxerc6TI');
@@ -61,3 +60,4 @@ test('ku6', 'http://v.ku6.com/show/GfXfl4ywPhpoTWIHaNGdQQ...html', 'http://playe
 // // Simulated
 // test('56', 'http://www.56.com/u55/v_OTI3MTA1OTY.html');
 // eroshare
+// test('ku6', 'http://v.ku6.com/show/GfXfl4ywPhpoTWIHaNGdQQ...html', 'http://player.ku6.com/refer/GfXfl4ywPhpoTWIHaNGdQQ../v.swf');
