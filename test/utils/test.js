@@ -1,4 +1,4 @@
-const embed = require('../../index');
+const embed = require('../../lib/embed');
 
 module.exports = (name, link, expectedLink) => {
   describe(name, function() {

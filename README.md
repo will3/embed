@@ -9,16 +9,16 @@ Engine
 - Auto play videos
 - Embed flash players on iOS
 - Generate other meta data for embedding videos: gif, image, title, category, duration, views, rating,
-- Find related videos 
+- Find related videos
 
 Product
-- View any video in split screen
-- Bookmark watched videos automatically
-- User authentication
+- Watch any video, from anywhere, together, in split screen
+- Save videos automatically, user authentication
+- Save split screen layouts
 - Create playlists / galleries
 - Share
 - Embed split screen elsewhere
 - Analytics
 
 Business
-- Monetization? 
+- Ads
