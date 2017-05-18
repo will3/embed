@@ -1,6 +1,5 @@
 import React from 'react';
 import Dimensions from 'react-dimensions';
-
 import EmbedView from './embedview';
 
 class MainView extends React.Component {
@@ -27,7 +26,7 @@ class MainView extends React.Component {
 					top: embed.top * height,
 					width: embed.width * width,
 					height: embed.height * height,
-					border: '1px solid #fff',
+					border: '1px solid #000',
 					boxSizing: 'border-box'
 				}}>
 					<EmbedView />
