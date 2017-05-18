@@ -13,8 +13,8 @@ app.get('/search', function(req, res) {
       res.json(result);
     })
     .catch((e) => {
-      res.status(400).send({
-        error: 'something went wrong'
+      setTimeout(() => {
+        throw e;
       });
     });
 });

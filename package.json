@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha lib/test"
+    "test": "mocha lib/test",
+    "clear": "node ./lib/test/utils/clearcache.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "url-parse": "^1.1.9"
   },
   "devDependencies": {
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "flat-cache": "^1.2.2"
   }
 }

@@ -8,9 +8,11 @@
     "react": "^15.5.4",
     "react-dimensions": "^1.3.0",
     "react-dom": "^15.5.4",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "uuidv4": "^0.5.0"
   },
   "devDependencies": {
+    "loaders.css": "^0.1.2",
     "react-scripts": "0.9.5"
   },
   "scripts": {

@@ -1,17 +1,11 @@
 import React from 'react';
 
 class EmbedView extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			video: null
-		}
-	}
-
 	render() {
-		const video = this.state.video == null ? null : (
-			<iframe src={this.state.video.url} style={{
+		const video = this.props.video;
+
+		const iframe = video == null ? null : (
+			<iframe src={video.url} style={{
 				width: '100%',
 				height: '100%',
 				position: 'absolute',
@@ -23,7 +17,7 @@ class EmbedView extends React.Component {
 
 		return (
 			<div>
-				{video}
+				{iframe}
 			</div>
 		);
 	}
