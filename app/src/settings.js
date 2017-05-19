@@ -1,5 +1,5 @@
 const settings = {
-	host: 'http://localhost:3001'
+	host: 'https://fourplay.herokuapp.com'
 };
 
 export default settings;
