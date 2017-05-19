@@ -8,16 +8,21 @@ app.use(cors());
 app.get('/search', function(req, res) {
   const url = req.query.url;
 
+  console.log(url);
   embed(url)
     .then((result) => {
+      console.log(result);
       res.json(result);
     })
     .catch((e) => {
-      setTimeout(() => {
-        throw e;
+      console.log(e.stack);
+      res.status(400).send({
+        error: 'something went wrong'
       });
     });
 });
+
+app.use(express.static(__dirname + '/public'));
 
 const port = 3001;
 app.listen(port);

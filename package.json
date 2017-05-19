@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha lib/test",
-    "clear": "node ./lib/test/utils/clearcache.js"
+    "clear": "node ./lib/test/utils/clearcache.js",
+    "start": "node server/index"
   },
   "author": "",
   "license": "ISC",
