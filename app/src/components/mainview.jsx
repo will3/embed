@@ -1,76 +1,68 @@
 import React from 'react';
 import EmbedView from './embedview';
 const uuid = require('uuidv4');
-
-class View {
-	constructor(params) {
-		params = params || {};
-		this.uuid = uuid();
-		this.left = params.left || 0;
-		this.top = params.top || 0;
-		this.width = params.width || 1;
-		this.height = params.height || 1;
-		this.aspect = params.aspect || (16 / 9);
-		this.depth = params.depth || 0;
-		this.children = [];
-	}
-
-	split(vertically) {
-		vertically = vertically || false;
-
-		if (vertically) {
-
-		} else {
-			// horizontally
-			
-		}
-	}
-
-	traverse(callback) {
-		const stop = callback(this);
-		if (stop) return true;
-		for (let i = 0; i < this.children.length; i++) {
-			const stop = this.children[i].traverse(callback);
-			if (stop) return true;
-		}
-	}
-}
+import BottomBar from './bottombar';
+import screenfull from 'screenfull';
+import storage from '../storage';
 
 class MainView extends React.Component {
 	constructor(props) {
 		super(props);
+
+		const videos = props.videos;
+
 		this.state = {
-			root: new View()
+			views: 
+			[{
+				left: 0,
+				top: 0,
+				width: 0.5,
+				height: 0.5,
+				video: videos[0]
+			}, {
+				left: 0.5,
+				top: 0,
+				width: 0.5,
+				height: 0.5,
+				video: videos[1]
+			}, {
+				left: 0,
+				top: 0.5,
+				width: 0.5,
+				height: 0.5,
+				video: videos[2]
+			}, {
+				left: 0.5,
+				top: 0.5,
+				width: 0.5,
+				height: 0.5,
+				video: videos[3]
+			}]
 		}
+
+		this.onFullScreen = this.onFullScreen.bind(this);
 	}
 
-	findViewToAdd() {
-		let found;
-		this.state.root.traverse((view) => {
-			if (view.video == null) {
-				found = view;
-				return stop;
-			}
-		});
+	onFullScreen() {
+		if (screenfull.enabled) {
+        screenfull.request(this.refs.embedContainer);
+    }
+	}
 
-		return found;
-	};
-
-	addVideo(video) {
-		let view = this.findViewToAdd();
-
-		if (view != null) {
-			view.video = video;
-			this.forceUpdate();
-			return;	
+	onVideo(video, index) {
+		const data = storage.get('4play-data') || {};
+		if (data.videos == null) {
+			data.videos = [];
 		}
+		data.videos[index] = video;
+		storage.set('4play-data', data);
 	}
 
 	render() {
-		const views = [];
-		this.state.root.traverse((view) => {
-			views.push(
-				<div key={view.uuid} style={{
+		const views = this.state.views.map((view, index) => {
+			return (
+				<div key={index} style={{
+					position: 'absolute',
 					left: view.left * 100 + '%',
 					top: view.top * 100 + '%',
 					width: view.width * 100 + '%',
@@ -78,7 +70,11 @@ class MainView extends React.Component {
 					border: '1px solid #000',
 					boxSizing: 'border-box'
 				}}>
-					<EmbedView video={view.video}/>
+					<EmbedView 
+					video={view.video} 
+					onVideo={(video) => {
+						this.onVideo(video, index);
+					}}/>
 				</div>
 			);
 		});
@@ -88,7 +84,29 @@ class MainView extends React.Component {
 				width: '100%',
 				height: '100%'
 			}}>
-				{views}
+				<div style={{
+					position: 'absolute',
+					top: 0,
+					right: 0,
+					bottom: 44,
+					left: 0
+				}}>
+					<div ref='embedContainer' style={{
+						width: '100%',
+						height: '100%'
+					}}>
+						{views}
+					</div>
+				</div>
+				
+				<div style={{
+					position: 'absolute',
+					bottom: 0,
+					left: 0,
+					right: 0
+				}}>
+					<BottomBar onFullScreen={this.onFullScreen}/>
+				</div>
 			</div>
 		);
 	}

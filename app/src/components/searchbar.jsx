@@ -55,7 +55,9 @@ class SearchBar extends React.Component {
         ref='input'
         type='text' 
         placeholder='Paste a url here, e.g. https://www.youtube.com/watch?v=BBauxerc6TI' 
-        onInput={this.onInput} />
+        onInput={this.onInput} style={{
+        	flex: 1
+        }}/>
         <button 
         className='SearchBar-button'
         style={{
