@@ -7,12 +7,14 @@ import Input from './input';
 import EmbedBar from './embedbar';
 import container from '../container';
 
+import storage from '../storage';
+
 class EmbedView extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			video: this.props.video,
+			result: this.props.result,
 			hideTopBar: false
 		};
 
@@ -44,28 +46,34 @@ class EmbedView extends React.Component {
 
 	onValue(value) {
 		search(value).then((result) => {
-			if (result.videos.length === 0) {
-				this.setState({ video: { url: value } });	
-				return;
-			}
+			result.url = value;
 			this.setState({
-				video: result.videos[0]
+				result: result
 			});
-			this.props.onVideo(result.videos[0]);
+
+			const data = storage.get('data') || {};
+			data.results = data.results || [];
+			data.results[this.props.index] = result;
+			storage.set('data', data);
 		});		
 	}
 
 	onClose() {
 		this.setState({
-			video: null
+			result: null
 		});
-		this.props.onVideo(null);
+		const data = storage.get('data') || {};
+		data.results = data.results || [];
+		data.results[this.props.index] = null;
+		storage.set('data', data);
 	}
 
 	render() {
-		const video = this.state.video;
+		const result = this.state.result;
 
-		const iframe = video == null ? null : (
+		const embedUrl = result == null ? null : result.videos.length === 0 ? result.url : result.videos[0].url;
+
+		const iframe = result == null ? null : (
 			<div style={{
 				position: 'absolute',
 				left: 0,
@@ -73,7 +81,7 @@ class EmbedView extends React.Component {
 				right: 0,
 				bottom: 0
 			}}>
-				<iframe src={video.url} style={{
+				<iframe src={embedUrl} style={{
 					width: '100%',
 					height: '100%',
 					border: 'none'
@@ -82,7 +90,7 @@ class EmbedView extends React.Component {
 			</div>
 		);
 
-		const input = video == null ? (
+		const input = result == null ? (
 			<div style={{
 				position: 'absolute',
 				left: 0,
@@ -105,8 +113,8 @@ class EmbedView extends React.Component {
 			</div>
 		) : null;
 
-		const topBar = (video == null || this.state.hideTopBar) ? null : (
-			<EmbedBar text={video.url} onClose={this.onClose} onValue={this.onValue} />
+		const topBar = (result == null || this.state.hideTopBar) ? null : (
+			<EmbedBar text={result.url || ''} onClose={this.onClose} onValue={this.onValue} />
 		);
 
 		return (

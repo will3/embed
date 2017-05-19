@@ -3,13 +3,12 @@ import EmbedView from './embedview';
 const uuid = require('uuidv4');
 import BottomBar from './bottombar';
 import screenfull from 'screenfull';
-import storage from '../storage';
 
 class MainView extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const videos = props.videos;
+		const results = props.results;
 
 		this.state = {
 			views: 
@@ -18,25 +17,25 @@ class MainView extends React.Component {
 				top: 0,
 				width: 0.5,
 				height: 0.5,
-				video: videos[0]
+				result: results[0]
 			}, {
 				left: 0.5,
 				top: 0,
 				width: 0.5,
 				height: 0.5,
-				video: videos[1]
+				result: results[1]
 			}, {
 				left: 0,
 				top: 0.5,
 				width: 0.5,
 				height: 0.5,
-				video: videos[2]
+				result: results[2]
 			}, {
 				left: 0.5,
 				top: 0.5,
 				width: 0.5,
 				height: 0.5,
-				video: videos[3]
+				result: results[3]
 			}]
 		}
 
@@ -47,15 +46,6 @@ class MainView extends React.Component {
 		if (screenfull.enabled) {
         screenfull.request(this.refs.embedContainer);
     }
-	}
-
-	onVideo(video, index) {
-		const data = storage.get('4play-data') || {};
-		if (data.videos == null) {
-			data.videos = [];
-		}
-		data.videos[index] = video;
-		storage.set('4play-data', data);
 	}
 
 	render() {
@@ -71,10 +61,8 @@ class MainView extends React.Component {
 					boxSizing: 'border-box'
 				}}>
 					<EmbedView 
-					video={view.video} 
-					onVideo={(video) => {
-						this.onVideo(video, index);
-					}}/>
+					result={view.result}
+					index={index} />
 				</div>
 			);
 		});
