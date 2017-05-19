@@ -1,4 +1,4 @@
-const embed = require('../../embed');
+const embed = require('../../index');
 const util = require('util');
 const requestCache = require('./requestCache');
 

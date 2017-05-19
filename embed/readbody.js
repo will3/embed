@@ -2,8 +2,10 @@ const URL = require('url-parse');
 const _ = require('lodash');
 const ogParser = require('og-parser').body;
 const heuristics = require('./heuristics');
+
 const cheerio = require('cheerio');
 const parseXml = cheerio.load;
+
 const htmlDecode = require('js-htmlencode').htmlDecode;
 
 const eachValue = (value, callback) => {

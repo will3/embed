@@ -4,27 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha lib/test",
-    "clear": "node ./lib/test/utils/clearcache.js",
     "start": "node server/index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^0.22.0",
-    "iframely": "^1.0.4",
-    "jaccard": "^0.4.0",
-    "js-htmlencode": "^0.3.0",
-    "lodash": "^4.17.4",
-    "node-phantom": "^0.2.5",
-    "og-parser": "github:will3/og-parser",
-    "open-graph": "^0.2.3",
-    "open-graph-scraper": "^2.5.1",
-    "phantom": "^4.0.3",
-    "q": "^1.5.0",
-    "request": "^2.81.0",
-    "throttle-debounce": "^1.0.1",
-    "url-parse": "^1.1.9"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const embed = require('../lib/embed');
+const embed = require('../embed');
 const cors = require('cors');
 
 app.use(cors());

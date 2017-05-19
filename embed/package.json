@@ -1,0 +1,27 @@
+{
+  "name": "embed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test",
+    "clear": "node ./test/utils/clearcache.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "jaccard": "^0.4.0",
+    "jquery": "^3.2.1",
+    "js-htmlencode": "^0.3.0",
+    "og-parser": "github:will3/og-parser",
+    "request": "^2.81.0",
+    "url-parse": "^1.1.9"
+  },
+  "devDependencies": {
+    "flat-cache": "^1.2.2"
+  }
+}
