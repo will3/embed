@@ -51,7 +51,7 @@ class EmbedView extends React.Component {
 		const result = this.props.result;
 
 		const embedUrl = result == null ? null : result.videos.length === 0 ? result.url : result.videos[0].url;
-
+		
 		const iframe = result == null ? null : (
 			<div style={{
 				position: 'absolute',
@@ -97,7 +97,9 @@ class EmbedView extends React.Component {
 						flex: 1,
 						marginRight: loader == null ? 0 : 12
 					}}>
-						<Input ref='input' onValue={this.onValue} 
+						<Input 
+						ref='input' 
+						onValue={this.onValue} 
 						placeholder={'Paste a url here, e.g. https://www.youtube.com/watch?v=BBauxerc6TI'}
 						style={{
 							flex: 1,
@@ -114,7 +116,7 @@ class EmbedView extends React.Component {
 		) : null;
 
 		const topBar = (result == null || this.props.hideTopBar) ? null : (
-			<EmbedBar text={result.url || ''} onClose={this.onClose} onValue={this.onValue} />
+			<EmbedBar result={result} onClose={this.onClose} onValue={this.onValue} />
 		);
 
 		return (

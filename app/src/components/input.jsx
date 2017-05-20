@@ -17,6 +17,10 @@ class Input extends React.Component {
 
 	focus() {
 		$(this.refs.input).focus();
+	}	
+
+	select() {
+		$(this.refs.input).select();	
 	}
 
 	onValue() {
@@ -31,7 +35,7 @@ class Input extends React.Component {
 
 	onClick() {
 		if (this.props.selectOnClick) {
-			$(this.refs.input).select();	
+			this.select();
 		}
 	}
 
@@ -59,7 +63,8 @@ class Input extends React.Component {
       defaultValue={this.props.value}
       onInput={throttle(200, this.onValue)} 
       onPaste={this.onPaste} 
-      onClick={this.onClick}/>
+      onClick={this.onClick}
+      onBlur={this.props.onBlur}/>
 		);
 	}
 };
