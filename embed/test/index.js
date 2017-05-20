@@ -1,28 +1,4 @@
-const test = require('./utils/test');
 
-// Normal - Chinese
-test('tv.sohu.com', 'http://tv.sohu.com/20151224/n432381576.shtml', 'http://share.vrs.sohu.com/2798175/v.swf&autoplay=false');
-test('my.tv.sohu.com', 'http://my.tv.sohu.com/us/100569193/88655884.shtml', 'http://tv.sohu.com/upload/swf/20121030/PlayerShell.swf?autoplay=true&topBar=1&shareBtn=1&likeBtn=1&topBar=1&sogouBtn=0&id=88655884');
-test('youku', 'http://v.youku.com/v_show/id_XMjcyMTA3MjM5Ng', 'http://player.youku.com/embed/XMjcyMTA3MjM5Ng==');
-
-// Normal
-test('youtube', 'https://www.youtube.com/watch?v=BBauxerc6TI', 'https://www.youtube.com/embed/BBauxerc6TI');
-test('vimeo', 'https://vimeo.com/216098603', 'https://player.vimeo.com/video/216098603');
-test('dailymotion', 'http://www.dailymotion.com/video/x5lvnhf_nick-puts-pressure-on-theresa-may-over-if-she-ll-put-taxes-up_news', 'https://www.dailymotion.com/embed/video/x5lvnhf');
-test('twitch', 'https://www.twitch.tv/speedgaming', 'http://player.twitch.tv/?channel=speedgaming&player=facebook&autoplay=true');
-test('dailymotion', 'http://www.dailymotion.com/video/x5lvh28_emirates-airline-profits-down-82-5-on-last-year_news', 'https://www.dailymotion.com/embed/video/x5lvh28');
-test('liveleak', 'https://www.liveleak.com/view?i=6eb_1494537998', 'https://www.liveleak.com/ll_embed?f=f65056ccdf60');
-test('break', 'http://www.break.com/video/leeroy-jenkins-is-12-3105110', 'http://www.break.com/embed/3105110/');
-test('ustream', 'http://www.ustream.tv/recorded/88992305', 'https://www.ustream.tv/embed/recorded/88992305?html5ui');
-test('metacafe', 'http://www.metacafe.com/watch/11506159/crazy-chick-let-me-see-your-phone-or-i-ll-jump', 'http://www.metacafe.com/embed/11506159/crazy-chick-let-me-see-your-phone-or-i-ll-jump/');
-
-// Porn
-test('pornhub', 'https://www.pornhub.com/view_video.php?viewkey=ph58cccc07d4dbe', 'https://www.pornhub.com/embed/ph58cccc07d4dbe');
-test('xhamster', 'https://xhamster.com/movies/7668106/sloppy_deepthroat.html', 'http://xhamster.com/xembed.php?video=7668106');
-test('youporn', 'https://www.youporn.com/watch/13747723/nubilefilms-passionate-threeway-makes-bff-squirt', 'https://www.youporn.com/embed/13747723/nubilefilms-passionate-threeway-makes-bff-squirt/');
-test('xvideos', 'https://www.xvideos.com/video27713419/follan_fuerte_en_el_cuarto_de_ropa', 'https://static-hw.xvideos.com/swf/xv-player.swf?id_video=27713419');
-test('xnxx', 'http://www.xnxx.com/video-d4ltdd7/0/finally_got_to_fuck_haydee_from_high_school', 'http://static-hw.xvideos.com/swf/xv-player.swf?id_video=22049905');
-test('xtube', 'https://www.xtube.com/video-watch/ex-asian-girl-554909');
 
 // TODO
 // 

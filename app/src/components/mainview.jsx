@@ -86,6 +86,15 @@ class MainView extends React.Component {
 
 		const height = only ? '100%' : this.state.fullscreen ? this.state.results[otherIndex] == null ? '100%' : '50%' : '50%';
 
+		let aspectRatio;
+		const result = this.state.results[index];
+		if (result != null && 
+			result.videos.length > 0 && 
+			result.videos[0].width > 0 && 
+			result.videos[0].height > 0) {
+			aspectRatio = result.videos[0].width / result.videos[0].height;
+		}
+
 		return (
 			<div style={{
 				height: height,
@@ -165,7 +174,7 @@ class MainView extends React.Component {
 					left: 0
 				}}>
 				
-				{views}
+					{views}
 
 				</div>
 				

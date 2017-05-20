@@ -115,10 +115,12 @@ const readBody = (body, url) => {
 
   for (let i = 0; i < result.videos.length; i++) {
     const video = result.videos[i];
+    video.url = htmlDecode(video.url);
+    video.width = video.width || 0;
+    video.height = video.height || 0;
     video.rating = heuristics.getVideoRating(video, {
       srcUrlParts: srcUrlParts
     });
-    video.url = htmlDecode(video.url);
   }
 
   for (let i = 0; i < result.images.length; i++) {

@@ -34,6 +34,8 @@ const getVideoRating = (video, params) => {
     value += 50;
   }
 
+  value += video.width * video.height / 1000000;
+
   return value;
 };
 
