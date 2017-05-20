@@ -24,7 +24,12 @@ class NavBar extends React.Component {
 				<a style={{
 					marginLeft: 12
 				}}>
-					<img src={logo} />
+					<div style={{
+						display: 'flex',
+						alignItems: 'center'
+					}}>
+						<img src={logo} />
+					</div>
 				</a>
 			
 				<div style={{

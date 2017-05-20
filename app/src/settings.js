@@ -1,6 +1,6 @@
 const settings = {
 	host: 'https://fourplay.herokuapp.com',
-	mockFullScreen: true
+	mockFullScreen: false
 };
 
 if (process.env.NODE_ENV === 'development') {

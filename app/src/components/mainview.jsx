@@ -6,6 +6,7 @@ import screenfull from 'screenfull';
 import $ from 'jquery';
 import storage from '../storage';
 import settings from '../settings';
+import Slider from './slider';
 
 class MainView extends React.Component {
 	constructor(props) {
@@ -112,26 +113,6 @@ class MainView extends React.Component {
 		width = width || 1;
 		height = height || 1;
 
-		// if (this.state.fullscreen && this.state.results[index] == null) {
-		// 	return null;
-		// }
-
-		// const otherIndex = 
-		// index === 0 ? 2 : 
-		// index === 2 ? 0 : 
-		// index === 1 ? 3 : 1;
-
-		// const height = only ? '100%' : this.state.fullscreen ? this.state.results[otherIndex] == null ? '100%' : '50%' : '50%';
-
-		// let aspectRatio;
-		// const result = this.state.results[index];
-		// if (result != null && 
-		// 	result.videos.length > 0 && 
-		// 	result.videos[0].width > 0 && 
-		// 	result.videos[0].height > 0) {
-		// 	aspectRatio = result.videos[0].width / result.videos[0].height;
-		// }
-
 		const fullscreen = this.state.fullscreen;
 
 		return (
@@ -186,23 +167,29 @@ class MainView extends React.Component {
 
 		const barHeight = 44;
 
+		const sliderShown = false;
+		const sliderWidth = 200;
+
+		const slider = sliderShown ? (
+			<div style={{
+				position: 'absolute',
+				left: 0,
+				top: barHeight,
+				bottom: 0,
+				width: sliderWidth,
+				backgroundColor: '#FFF',
+				boxShadow: '5px 0 5px rgba(0, 0, 0, 0.05)',
+				borderRight: '1px solid #CCC'
+			}}>
+				<Slider />
+			</div>
+		) : null;
+
 		return (
 			<div style={{
 				width: '100%',
 				height: '100%'
 			}}>
-				<div style={{
-					position: 'absolute',
-					top: barHeight,
-					right: 0,
-					bottom: 0,
-					left: 0
-				}}>
-				
-					{embedContainer}
-
-				</div>
-				
 				<div style={{
 					position: 'absolute',
 					top: 0,
@@ -211,6 +198,18 @@ class MainView extends React.Component {
 				}}>
 					<NavBar onFullScreen={this.onFullScreen}/>
 				</div>
+
+				<div style={{
+					position: 'absolute',
+					top: barHeight,
+					right: 0,
+					bottom: 0,
+					left: 0
+				}}>
+					{embedContainer}
+				</div>
+
+				{slider}
 			</div>
 		);
 	}

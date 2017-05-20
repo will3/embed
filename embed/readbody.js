@@ -35,9 +35,9 @@ const readBody = (body, params) => {
   const meta = ogParser(body);
   result.title = meta.title;
 
-  if (meta.og != null) {
-    const og = meta.og;
+  const og = meta.og;
 
+  if (og != null) {
     result.title = result.title || og.title;
 
     eachValue(og.image, (image) => {
@@ -68,9 +68,9 @@ const readBody = (body, params) => {
     });
   }
 
-  if (meta.twitter != null) {
-    const twitter = meta.twitter;
+  const twitter = meta.twitter;
 
+  if (twitter != null) {
     result.title = result.title || twitter.title;
     result.description = result.description || twitter.description;
 
@@ -110,6 +110,20 @@ const readBody = (body, params) => {
     };
     result.videos.push(video);
   }
+
+  const getTwitterSite = (twitter) => {
+    if (twitter == null || twitter.site == null || twitter.site.name == null) {
+      return null;
+    }
+
+    const siteName = twitter.site.name;
+    if (siteName.substring(0, 1) === '@') {
+      return siteName.substring(1);
+    }
+    return siteName;
+  };
+
+  result.site_name = (og || {}).site_name || getTwitterSite(twitter) || getMetaValue($("meta[name='application-name']"));
 
   $('*').each(function(i, selected) {
     readElement(this, selected, result);
