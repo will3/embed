@@ -9,11 +9,14 @@ TODO
 - Embed flash players on iOS
 - Generate other meta data for embedding videos: gif, image, title, category, duration, views, rating,
 - Find related videos
+- Search for videos
 
 ### Web App
 - Watch any video, from anywhere, together, in split screen
 - Save videos automatically
 - Save split screen layouts
+- Show related videos
+- Search for videos
 
 TODO
 
