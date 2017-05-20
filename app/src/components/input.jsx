@@ -45,7 +45,11 @@ class Input extends React.Component {
 	}
 
 	render() {
-		const style = this.props.style || {};
+		const style = $.extend({
+			outline: 'none',
+			fontSize: 12
+		}, this.props.style || {});
+
 		return (
 			<input 
 			style={style}

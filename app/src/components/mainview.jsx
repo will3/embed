@@ -1,7 +1,7 @@
 import React from 'react';
 import EmbedView from './embedview';
 const uuid = require('uuidv4');
-import BottomBar from './bottombar';
+import NavBar from './navbar';
 import screenfull from 'screenfull';
 import $ from 'jquery';
 import storage from '../storage';
@@ -135,6 +135,8 @@ class MainView extends React.Component {
 			</div>
 		);
 
+		const barHeight = 44;
+
 		return (
 			<div style={{
 				width: '100%',
@@ -142,9 +144,9 @@ class MainView extends React.Component {
 			}}>
 				<div style={{
 					position: 'absolute',
-					top: 0,
+					top: barHeight,
 					right: 0,
-					bottom: 44,
+					bottom: 0,
 					left: 0
 				}}>
 				
@@ -154,11 +156,11 @@ class MainView extends React.Component {
 				
 				<div style={{
 					position: 'absolute',
-					bottom: 0,
+					top: 0,
 					left: 0,
 					right: 0
 				}}>
-					<BottomBar onFullScreen={this.onFullScreen}/>
+					<NavBar onFullScreen={this.onFullScreen}/>
 				</div>
 			</div>
 		);

@@ -84,7 +84,6 @@ class EmbedView extends React.Component {
 				right: 0,
 				top: 0,
 				bottom: 0,
-				border: '1px solid #000',
 				backgroundColor: '#fff',
 			}} 
 			onClick={this.onInputClick}>
@@ -106,7 +105,6 @@ class EmbedView extends React.Component {
 							outline: 'none',
 							fontSize: 16,
 							height: '100%',
-							textAlign: 'center',
 							width: '100%'
 						}}/>
 					</div>
