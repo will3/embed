@@ -3,69 +3,154 @@ import EmbedView from './embedview';
 const uuid = require('uuidv4');
 import BottomBar from './bottombar';
 import screenfull from 'screenfull';
+import $ from 'jquery';
+import storage from '../storage';
 
 class MainView extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const results = props.results;
+		// const results = props.results;
+
+		const data = storage.get('data') || {};
 
 		this.state = {
-			views: 
-			[{
-				left: 0,
-				top: 0,
-				width: 0.5,
-				height: 0.5,
-				result: results[0]
-			}, {
-				left: 0.5,
-				top: 0,
-				width: 0.5,
-				height: 0.5,
-				result: results[1]
-			}, {
-				left: 0,
-				top: 0.5,
-				width: 0.5,
-				height: 0.5,
-				result: results[2]
-			}, {
-				left: 0.5,
-				top: 0.5,
-				width: 0.5,
-				height: 0.5,
-				result: results[3]
-			}]
+			fullscreen: false,
+			results: data.results || []
+			// views: 
+			// [{
+			// 	left: 0,
+			// 	top: 0,
+			// 	width: 0.5,
+			// 	height: 0.5,
+			// 	result: results[0]
+			// }, {
+			// 	left: 0.5,
+			// 	top: 0,
+			// 	width: 0.5,
+			// 	height: 0.5,
+			// 	result: results[1]
+			// }, {
+			// 	left: 0,
+			// 	top: 0.5,
+			// 	width: 0.5,
+			// 	height: 0.5,
+			// 	result: results[2]
+			// }, {
+			// 	left: 0.5,
+			// 	top: 0.5,
+			// 	width: 0.5,
+			// 	height: 0.5,
+			// 	result: results[3]
+			// }]
 		}
 
 		this.onFullScreen = this.onFullScreen.bind(this);
+	}
+
+	componentDidMount() {
+		$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', (e) => {
+      if (!window.screenTop && !window.screenY) {
+        // exitFullScreen
+        this.setState({
+					fullscreen: false
+				});
+      } else {
+        // fullScreen
+        this.setState({
+					fullscreen: true
+				});
+      }
+    });
+	}
+
+	componentWillUnmount() {
+		$(document).off('webkitfullscreenchange mozfullscreenchange fullscreenchange');
 	}
 
 	onFullScreen() {
 		if (screenfull.enabled) {
         screenfull.request(this.refs.embedContainer);
     }
+	}	
+
+	renderView(index, only) {
+		if (this.state.fullscreen && this.state.results[index] == null) {
+			return null;
+		}
+
+		const otherIndex = 
+		index === 0 ? 2 : 
+		index === 2 ? 0 : 
+		index === 1 ? 3 : 1;
+
+		const height = only ? '100%' : this.state.fullscreen ? this.state.results[otherIndex] == null ? '100%' : '50%' : '50%';
+
+		return (
+			<div style={{
+				height: height,
+				width: '100%'
+			}}>
+				<EmbedView 
+				hideTopBar={this.state.fullscreen}
+				result={this.state.results[index]}
+				onResult={ (result) => {
+					this.state.results[index] = result;
+
+					const data = storage.get('data') || {};
+					data.results = this.state.results;
+					storage.set('data', data);
+
+					this.forceUpdate();
+				} }/>
+			</div>
+		);
 	}
 
 	render() {
-		const views = this.state.views.map((view, index) => {
-			return (
-				<div key={index} style={{
-					position: 'absolute',
-					left: view.left * 100 + '%',
-					top: view.top * 100 + '%',
-					width: view.width * 100 + '%',
-					height: view.height * 100 + '%',
-					border: '1px solid #000',
-					boxSizing: 'border-box'
+		let count = 0;
+		let found;
+		for (let i = 0; i < 4; i++) {
+			if (this.state.results[i] != null) {
+				count++;
+				found = i;
+			}
+		}
+
+		const views = (count === 1 && this.state.fullscreen) ? this.renderView(found, true) : (
+			<div ref='embedContainer' style={{
+				width: '100%',
+				height: '100%',
+				display: 'flex',
+				flexDirection: 'row'
+			}}>
+
+				<div style={{
+					width: '50%',
+					height: '100%',
+					display: 'flex',
+					flexDirection: 'column'	
 				}}>
-					<EmbedView 
-					result={view.result}
-					index={index} />
+
+					{this.renderView(0)}
+					{this.renderView(2)}
+
 				</div>
-			);
-		});
+
+				<div style={{
+					width: '50%',
+					height: '100%',
+					display: 'flex',
+					flexDirection: 'column'
+				}}>
+
+					{this.renderView(1)}
+					{this.renderView(3)}
+
+				</div>
+
+			</div>
+		);
 
 		return (
 			<div style={{
@@ -79,12 +164,9 @@ class MainView extends React.Component {
 					bottom: 44,
 					left: 0
 				}}>
-					<div ref='embedContainer' style={{
-						width: '100%',
-						height: '100%'
-					}}>
-						{views}
-					</div>
+				
+				{views}
+
 				</div>
 				
 				<div style={{

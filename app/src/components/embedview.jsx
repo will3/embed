@@ -7,15 +7,12 @@ import Input from './input';
 import EmbedBar from './embedbar';
 import container from '../container';
 
-import storage from '../storage';
-
 class EmbedView extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			result: this.props.result,
-			hideTopBar: false
+			result: this.props.result
 		};
 
 		this.onValue = this.onValue.bind(this);
@@ -24,52 +21,19 @@ class EmbedView extends React.Component {
 		this.events = container.events;
 	}
 
-	componentDidMount() {
-		$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', (e) => {
-      if (!window.screenTop && !window.screenY) {
-        // exitFullScreen
-        this.setState({
-					hideTopBar: false
-				});
-      } else {
-        // fullScreen
-        this.setState({
-					hideTopBar: true
-				});
-      }
-    });
-	}
-
-	componentWillUnmount() {
-		$(document).off('webkitfullscreenchange mozfullscreenchange fullscreenchange');
-	}
-
 	onValue(value) {
 		search(value).then((result) => {
 			result.url = value;
-			this.setState({
-				result: result
-			});
-
-			const data = storage.get('data') || {};
-			data.results = data.results || [];
-			data.results[this.props.index] = result;
-			storage.set('data', data);
+			this.props.onResult(result);
 		});		
 	}
 
 	onClose() {
-		this.setState({
-			result: null
-		});
-		const data = storage.get('data') || {};
-		data.results = data.results || [];
-		data.results[this.props.index] = null;
-		storage.set('data', data);
+		this.props.onResult(null);
 	}
 
 	render() {
-		const result = this.state.result;
+		const result = this.props.result;
 
 		const embedUrl = result == null ? null : result.videos.length === 0 ? result.url : result.videos[0].url;
 
@@ -77,7 +41,7 @@ class EmbedView extends React.Component {
 			<div style={{
 				position: 'absolute',
 				left: 0,
-				top: this.state.hideTopBar ? 0 : 32,
+				top: this.props.hideTopBar ? 0 : 32,
 				right: 0,
 				bottom: 0
 			}}>
@@ -97,7 +61,9 @@ class EmbedView extends React.Component {
 				right: 0,
 				top: 0,
 				bottom: 0,
-				display: 'flex'
+				display: 'flex',
+				border: '1px solid #000',
+				boxSizing: 'border-box'
 			}}>
 				<Input onValue={this.onValue} 
 				placeholder={'Paste a url here, e.g. https://www.youtube.com/watch?v=BBauxerc6TI'}
@@ -113,7 +79,7 @@ class EmbedView extends React.Component {
 			</div>
 		) : null;
 
-		const topBar = (result == null || this.state.hideTopBar) ? null : (
+		const topBar = (result == null || this.props.hideTopBar) ? null : (
 			<EmbedBar text={result.url || ''} onClose={this.onClose} onValue={this.onValue} />
 		);
 
