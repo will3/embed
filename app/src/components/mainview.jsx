@@ -17,32 +17,6 @@ class MainView extends React.Component {
 		this.state = {
 			fullscreen: false,
 			results: data.results || []
-			// views: 
-			// [{
-			// 	left: 0,
-			// 	top: 0,
-			// 	width: 0.5,
-			// 	height: 0.5,
-			// 	result: results[0]
-			// }, {
-			// 	left: 0.5,
-			// 	top: 0,
-			// 	width: 0.5,
-			// 	height: 0.5,
-			// 	result: results[1]
-			// }, {
-			// 	left: 0,
-			// 	top: 0.5,
-			// 	width: 0.5,
-			// 	height: 0.5,
-			// 	result: results[2]
-			// }, {
-			// 	left: 0.5,
-			// 	top: 0.5,
-			// 	width: 0.5,
-			// 	height: 0.5,
-			// 	result: results[3]
-			// }]
 		}
 
 		this.onFullScreen = this.onFullScreen.bind(this);
