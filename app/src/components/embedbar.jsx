@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from './input';
 import SmartInput from './smartinput';
+import StarButton from './starbutton';
 
 class EmbedBar extends React.Component {
 	render() {
@@ -26,6 +27,7 @@ class EmbedBar extends React.Component {
 					selectOnClick={true} 
 					onValue={this.props.onValue} />
 				</div>
+				<StarButton onClick={this.props.onStar} starred={this.props.starred}/>
 				<div style={{
 					fontSize: 16,
 					width: 32,
