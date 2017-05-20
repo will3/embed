@@ -20,7 +20,11 @@ const getImageUrl = (image) => {
   return image.url || image.src || image;
 };
 
-const readBody = (body, url) => {
+const readBody = (body, params) => {
+  params = params || {};
+  const url = params.url;
+  const autoplay = params.autoplay || false;
+
   const result = {
     images: [],
     videos: []
@@ -116,12 +120,28 @@ const readBody = (body, url) => {
   for (let i = 0; i < result.videos.length; i++) {
     const video = result.videos[i];
     video.url = htmlDecode(video.url);
+
+    if (autoplay) {
+      // Add autoplay to query
+      const urlObj = new URL(video.url, true);
+      urlObj.query.autoplay = '1';
+      video.url = urlObj.toString();
+    }
+
     video.width = video.width || 0;
     video.height = video.height || 0;
     video.rating = heuristics.getVideoRating(video, {
       srcUrlParts: srcUrlParts
     });
   }
+
+  result.videos = _.filter(result.videos, (video) => {
+    // Filter out same links
+    if (video.url === url) {
+      return false;
+    }
+    return true;
+  });
 
   for (let i = 0; i < result.images.length; i++) {
     const image = result.images[i];
@@ -177,12 +197,13 @@ const readElement = (el, selected, result) => {
     }
   }
 
-  // for (name in el.attribs) {
-  //   value = el.attribs[name];
-  //   source = { el: el.name, attr: name };
+  for (name in el.attribs) {
+    value = el.attribs[name];
 
-  //   readString(value, result, source);
-  // }
+    if (name === 'data-react-props') {
+      readScript(value, result);
+    }
+  }
 };
 
 const readString = (value, result, source) => {

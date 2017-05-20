@@ -3,11 +3,11 @@ const readBody = require('./readbody');
 
 const embed = (url, params) => {
   params = params || {};
+  params.url = url;
 
-  return loadPage(url, {
-    requestCache: params.requestCache
-  }).then(function(r) {
-    return readBody(r.body, url);
+  return loadPage(url, params)
+  .then(function(r) {
+    return readBody(r.body, params);
   });
 }
 

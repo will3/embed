@@ -3,6 +3,17 @@ const util = require('util');
 const requestCache = require('./requestCache');
 
 module.exports = (name, link, expectedLink) => {
+  if (Array.isArray(link)) {
+    link.forEach((l) => {
+      testLink(name, l);
+    });
+    return;
+  }
+
+  testLink(name, link, expectedLink);
+};
+
+const testLink = (name, link, expectedLink) => {
   it(name, function(done) {
     this.timeout(20000);
 
@@ -10,7 +21,7 @@ module.exports = (name, link, expectedLink) => {
       requestCache: requestCache
     }).then(function(result) {
       if (result.videos.length === 0) {
-        throw new Error('no way to embed ' + result.url);
+        throw new Error('no way to embed ' + link);
       }
 
       console.log(util.inspect(result, false, 4));
@@ -32,4 +43,4 @@ module.exports = (name, link, expectedLink) => {
       });
     });
   });
-};
+}

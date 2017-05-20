@@ -9,7 +9,9 @@ app.get('/search', function(req, res) {
   const url = req.query.url;
 
   console.log(url);
-  embed(url)
+  embed(url, {
+    autoplay: true
+  })
     .then((result) => {
       if (result.videos.length > 1) {
         const video = result.videos[0];

@@ -15,6 +15,10 @@ class Input extends React.Component {
 		return $(this.refs.input).val();
 	}
 
+	focus() {
+		$(this.refs.input).focus();
+	}
+
 	onValue() {
 		this.fireValue(this.value);
 	}

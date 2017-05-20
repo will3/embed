@@ -12,24 +12,39 @@ class EmbedView extends React.Component {
 		super(props);
 
 		this.state = {
-			result: this.props.result
+			result: this.props.result,
+			loadingResult: false
 		};
 
 		this.onValue = this.onValue.bind(this);
 		this.onClose = this.onClose.bind(this);
+		this.onInputClick = this.onInputClick.bind(this);
 
 		this.events = container.events;
 	}
 
 	onValue(value) {
-		search(value).then((result) => {
+		this.setState({
+			loadingResult: true
+		});
+		search(value)
+		.then((result) => {
 			result.url = value;
 			this.props.onResult(result);
+		})
+		.finally(() => {
+			this.setState({
+				loadingResult: false
+			});
 		});		
 	}
 
 	onClose() {
 		this.props.onResult(null);
+	}
+
+	onInputClick() {
+		this.refs.input.focus();
 	}
 
 	render() {
@@ -54,28 +69,49 @@ class EmbedView extends React.Component {
 			</div>
 		);
 
+		const loader = this.state.loadingResult ? (
+			<div className="loader-inner ball-clip-rotate"><div style={{
+				borderColor: '#777',
+				borderBottomColor: 'transparent'
+			}}></div></div>
+		) : null;
+
 		const input = result == null ? (
 			<div style={{
+				padding: 24,
 				position: 'absolute',
 				left: 0,
 				right: 0,
 				top: 0,
 				bottom: 0,
-				display: 'flex',
 				border: '1px solid #000',
-				boxSizing: 'border-box'
-			}}>
-				<Input onValue={this.onValue} 
-				placeholder={'Paste a url here, e.g. https://www.youtube.com/watch?v=BBauxerc6TI'}
-				style={{
-					flex: 1,
-					border: 'none',
-					outline: 'none',
-					fontSize: 16,
-					height: '100%',
-					textAlign: 'center',
-					padding: 12
-				}}/>
+				backgroundColor: '#fff',
+			}} 
+			onClick={this.onInputClick}>
+				<div style={{
+					display: 'flex',
+					boxSizing: 'border-box',
+					alignItems: 'center',
+					height: '100%'
+				}}>
+					<div style={{
+						flex: 1,
+						marginRight: loader == null ? 0 : 12
+					}}>
+						<Input ref='input' onValue={this.onValue} 
+						placeholder={'Paste a url here, e.g. https://www.youtube.com/watch?v=BBauxerc6TI'}
+						style={{
+							flex: 1,
+							border: 'none',
+							outline: 'none',
+							fontSize: 16,
+							height: '100%',
+							textAlign: 'center',
+							width: '100%'
+						}}/>
+					</div>
+					{loader}
+				</div>
 			</div>
 		) : null;
 

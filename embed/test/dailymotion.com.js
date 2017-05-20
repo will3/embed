@@ -5,5 +5,4 @@ test('dailymotion',
 	'https://www.dailymotion.com/embed/video/x5lvnhf');
 
 test('dailymotion', 
-	'http://www.dailymotion.com/video/x5lvh28_emirates-airline-profits-down-82-5-on-last-year_news', 
-	'https://www.dailymotion.com/embed/video/x5lvh28');
+	'http://www.dailymotion.com/embed/video/xcv6dv_pixels-by-patrick-jean_creation');
