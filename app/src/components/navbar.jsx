@@ -1,28 +1,30 @@
 import React from 'react';
-import Input from './input';
 import logo from '../assets/logo2.png';
+import hamburger from '../assets/hamburger.png';
 
 class NavBar extends React.Component {
 	render() {
-		// <div style={{
-		// 			marginLeft: 12
-		// 		}}>
-		// 			<Input style={{
-		// 				height: 36,
-		// 				padding: 0,
-		// 				boxSizing: 'border-box'
-		// 			}}/>
-		// 		</div>
 		return (
 			<div style={{
-				height: this.props.height - 1,
+				height: this.props.height,
 				display: 'flex',
 				alignItems: 'center',
 				backgroundColor: '#F6F7F7',
-				borderBottom: '1px solid #DDD'
+				borderBottom: '1px solid #DDD',
+				boxSizing: 'border-box'
 			}}>
-				<a style={{
+				<div style={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					width: 44,
+					height: 44,
 					marginLeft: 12
+				}} onClick={this.props.onMenuButtonClicked}>
+					<img src={hamburger} />
+				</div>
+				<a style={{
+					marginLeft: 0
 				}}>
 					<div style={{
 						display: 'flex',

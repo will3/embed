@@ -6,7 +6,6 @@ import search from '../api/search';
 import Input from './input';
 import EmbedBar from './embedbar';
 import container from '../container';
-import storage from '../storage';
 
 class EmbedView extends React.Component {
 	constructor(props) {
@@ -19,7 +18,6 @@ class EmbedView extends React.Component {
 		this.onValue = this.onValue.bind(this);
 		this.onClose = this.onClose.bind(this);
 		this.onInputClick = this.onInputClick.bind(this);
-		this.onStar = this.onStar.bind(this);
 
 		this.events = container.events;
 	}
@@ -38,31 +36,6 @@ class EmbedView extends React.Component {
 				loadingResult: false
 			});
 		});		
-	}
-
-	get videoUrl() {
-		if (this.props.result == null || this.props.result.videos.length === 0) {
-			return;
-		}
-		return this.props.result.videos[0].url;
-	}
-
-	get starred() {
-		const key = this.videoUrl;
-		if (key == null) {
-			return false;
-		}
-		return storage.favs.has(key);
-	}
-
-	onStar() {
-		const key = this.videoUrl;
-		if (storage.favs.has(key)) {
-			storage.favs.remove(key);
-		} else {
-			storage.favs.add(this.props.result);
-		}
-		this.forceUpdate();
 	}
 
 	onClose() {
@@ -146,8 +119,8 @@ class EmbedView extends React.Component {
 			result={result} 
 			onClose={this.onClose} 
 			onValue={this.onValue} 
-			onStar={this.onStar} 
-			starred={this.starred}/>
+			onStar={this.props.onStar} 
+			starred={this.props.starred}/>
 		);
 
 		return (

@@ -13,7 +13,8 @@ class EmbedBar extends React.Component {
 			<div style={{
 				display: 'flex',
 				boxSizing: 'border-box',
-				height: 32
+				height: 32,
+				backgroundColor: '#FFF'
 			}}>
 				<div style={{
 					flex: 1,
@@ -34,8 +35,7 @@ class EmbedBar extends React.Component {
 					height: '100%',
 					display: 'flex',
 					justifyContent: 'center',
-					alignItems: 'center',
-					backgroundColor: '#FFF'
+					alignItems: 'center'
 				}} onClick={this.props.onClose}>
 					<i className="fa fa-times" aria-hidden="true"></i>
 				</div>

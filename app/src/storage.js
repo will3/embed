@@ -1,26 +1,16 @@
-import storage from 'local-storage-fallback';
-
-const prefix = '4play-';
+import lscache from 'ls-cache';
 
 export default {
 	get(key) {
-		try {
-			return JSON.parse(storage.getItem(prefix + key));
-		} catch(err) {
-			return null;
-		}
+		return lscache.get(key);
 	},
 	
-	set(key, value) {
-		storage.setItem(prefix + key, JSON.stringify(value));
+	set(key, value, time) {
+		lscache.set(key, value, time);
 	},
 
 	get favs() {
-		const add = (result) => {
-			if (result.videos.length === 0) {
-				return;
-			}
-			const key = result.videos[0].url;
+		const add = (key, result) => {
 			const favs = this.get('fav') || {};
 			favs[key] = result;
 			this.set('fav', favs);
@@ -37,8 +27,12 @@ export default {
 			return favs[key] != null;
 		}
 
+		const getAll = () => {
+			return this.get('fav') || {};
+		}
+
 		return {
-			add, remove, has
+			add, remove, has, getAll
 		}
 	}
 }

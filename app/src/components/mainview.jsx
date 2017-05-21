@@ -16,10 +16,14 @@ class MainView extends React.Component {
 
 		this.state = {
 			fullscreen: false,
-			results: data.results || []
+			results: data.results || [],
+			sliderShown: false
 		}
 
 		this.onFullScreen = this.onFullScreen.bind(this);
+		this.onMenuButtonClicked = this.onMenuButtonClicked.bind(this);
+		this.onSliderOverlayClicked = this.onSliderOverlayClicked.bind(this);
+		this.onAddVideo = this.onAddVideo.bind(this);
 	}
 
 	componentDidMount() {
@@ -42,6 +46,17 @@ class MainView extends React.Component {
 		$(document).off('webkitfullscreenchange mozfullscreenchange fullscreenchange');
 	}
 
+	onAddVideo(result) {
+		const results = this.state.results;
+		for (let i = 0; i < 4; i++) {
+			if (results[i] == null) {
+				results[i] = result;
+				break;
+			}
+		}
+		this.setState({ results });
+	}
+
 	onFullScreen() {
 		if (settings.mockFullScreen) {
 			this._mockFullScreen = !this._mockFullScreen;
@@ -56,6 +71,18 @@ class MainView extends React.Component {
         screenfull.request(this.refs.embedContainer);
     }
 	}	
+
+	onMenuButtonClicked() {
+		this.setState({
+			sliderShown: !this.state.sliderShown
+		});
+	}
+
+	onSliderOverlayClicked() {
+		this.setState({
+			sliderShown: false
+		});	
+	}
 
 	renderViews() {
 		const fullscreen = this.state.fullscreen;
@@ -107,6 +134,19 @@ class MainView extends React.Component {
 		}
 	}
 
+	getVideoUrl(index) {
+
+		const result = this.state.results[index];
+		if (result == null) {
+			return null;
+		}
+		const video = result.videos[0];
+		if (video == null) {
+			return null;
+		}
+		return video.url;
+	}
+
 	renderView(index, left, top, width, height) {
 		left = left || 0;
 		top = top || 0;
@@ -114,6 +154,8 @@ class MainView extends React.Component {
 		height = height || 1;
 
 		const fullscreen = this.state.fullscreen;
+		const key = this.getVideoUrl(index);
+		const starred = key == null ? false : storage.favs.has(key);
 
 		return (
 			<div key={index} style={{
@@ -138,7 +180,17 @@ class MainView extends React.Component {
 					storage.set('data', data);
 
 					this.forceUpdate();
-				} }/>
+				}}
+				onStar={ () => {
+					const key = this.getVideoUrl(index);
+					if (storage.favs.has(key)) {
+						storage.favs.remove(key);
+					} else {
+						storage.favs.add(key, this.state.results[index] );
+					}
+					this.forceUpdate();
+				}} 
+				starred={starred} />
 			</div>
 		);
 	}
@@ -167,7 +219,7 @@ class MainView extends React.Component {
 
 		const barHeight = 44;
 
-		const sliderShown = false;
+		const sliderShown = this.state.sliderShown;
 		const sliderWidth = 200;
 
 		const slider = sliderShown ? (
@@ -179,9 +231,22 @@ class MainView extends React.Component {
 				width: sliderWidth,
 				backgroundColor: '#FFF',
 				boxShadow: '5px 0 5px rgba(0, 0, 0, 0.05)',
-				borderRight: '1px solid #CCC'
+				borderRight: '1px solid #CCC',
+				overflow: 'auto'
 			}}>
-				<Slider />
+				<Slider onAddVideo={this.onAddVideo}/>
+			</div>
+		) : null;
+
+		const sliderOverlay = sliderShown ? (
+			<div style={{
+				position: 'absolute',
+				left: sliderWidth,
+				top: barHeight,
+				bottom: 0,
+				right: 0,
+				backgroundColor: 'rgba(0, 0, 0, 0.5)'
+			}} onClick={this.onSliderOverlayClicked}>
 			</div>
 		) : null;
 
@@ -196,7 +261,9 @@ class MainView extends React.Component {
 					left: 0,
 					right: 0
 				}}>
-					<NavBar onFullScreen={this.onFullScreen}/>
+					<NavBar 
+					onFullScreen={this.onFullScreen}
+					onMenuButtonClicked={this.onMenuButtonClicked}/>
 				</div>
 
 				<div style={{
@@ -210,6 +277,7 @@ class MainView extends React.Component {
 				</div>
 
 				{slider}
+				{sliderOverlay}
 			</div>
 		);
 	}
