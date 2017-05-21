@@ -6,6 +6,7 @@ import search from '../api/search';
 import Input from './input';
 import EmbedBar from './embedbar';
 import container from '../container';
+import mixpanel from '../mixpanel';
 
 class EmbedView extends React.Component {
 	constructor(props) {
@@ -30,6 +31,17 @@ class EmbedView extends React.Component {
 		.then((result) => {
 			result.url = value;
 			this.props.onResult(result);
+			if (result.videos.length === 0) {
+				mixpanel.track('embed no videos', {
+					url: value,
+					screenIndex: this.props.screenIndex
+				});
+			} else {
+				mixpanel.track('embed', {
+					url: value,
+					screenIndex: this.props.screenIndex
+				});
+			}
 		})
 		.finally(() => {
 			this.setState({

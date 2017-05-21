@@ -2,6 +2,7 @@ import React from 'react';
 import storage from '../storage';
 import EmbedView from './embedview';
 import screenfull from 'screenfull';
+import mixpanel from '../mixpanel';
 
 class EmbedContainer extends React.Component {
 
@@ -46,6 +47,7 @@ class EmbedContainer extends React.Component {
 				borderLeft: index === 1 || index === 2 ? 'none' : undefined
 			}}>
 				<EmbedView 
+				screenIndex={index}
 				hideTopBar={this.props.fullscreen}
 				result={this.props.results[index]}
 				onResult={ (result) => {
@@ -61,8 +63,16 @@ class EmbedContainer extends React.Component {
 					const key = this.getVideoUrl(index);
 					if (storage.favs.has(key)) {
 						storage.favs.remove(key);
+						mixpanel.track('unfav', {
+							url: key,
+							screenIndex: index
+						});
 					} else {
 						storage.favs.add(key, this.props.results[index] );
+						mixpanel.track('fav', {
+							url: key,
+							screenIndex: index
+						});
 					}
 					this.forceUpdate();
 				}} 

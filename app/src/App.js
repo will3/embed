@@ -4,6 +4,7 @@ import MainView from './components/mainview';
 import container from './container';
 import search from './api/search';
 import storage from './storage';
+import mixpanel from './mixpanel';
 
 import './App.css';
 
@@ -17,6 +18,9 @@ class App extends Component {
 
   componentDidMount() {
     container.app = this;
+    mixpanel.identify();
+    mixpanel.people.increment('app opened');
+    mixpanel.track('app opened');
   }
 
   render() {

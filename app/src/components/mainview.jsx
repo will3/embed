@@ -7,6 +7,7 @@ import storage from '../storage';
 import settings from '../settings';
 import Slider from './slider';
 import EmbedContainer from './embedcontainer';
+import mixpanel from '../mixpanel';
 
 class MainView extends React.Component {
 	constructor(props) {
@@ -30,6 +31,17 @@ class MainView extends React.Component {
 		$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', (e) => {
       if (!window.screenTop && !window.screenY) {
         // exitFullScreen
+        
+        const screenIndexes = [];
+        for (let i = 0; i < this.state.results.length; i++) {
+        	if (this.state.results[i] != null) {
+        		screenIndexes.push(i);
+        	}
+        }
+        mixpanel.track('enter fullscreen', {
+        	screenIndexes: screenIndexes
+        });
+
         this.setState({
 					fullscreen: false
 				});
@@ -38,6 +50,7 @@ class MainView extends React.Component {
         this.setState({
 					fullscreen: true
 				});
+				mixpanel.track('exit fullscreen');
       }
     });
 	}
@@ -50,6 +63,9 @@ class MainView extends React.Component {
 		const results = this.state.results;
 		for (let i = 0; i < 4; i++) {
 			if (results[i] == null) {
+				mixpanel.track('add from favourite', {
+					url: result.url
+				});
 				results[i] = result;
 				break;
 			}
@@ -71,6 +87,10 @@ class MainView extends React.Component {
 	}	
 
 	onMenuButtonClicked() {
+		if (!this.state.sliderShown) {
+			// opening slider...
+			mixpanel.track('open slider');
+		}
 		this.setState({
 			sliderShown: !this.state.sliderShown
 		});
