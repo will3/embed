@@ -18,6 +18,10 @@ class App extends Component {
 
   componentDidMount() {
     container.app = this;
+    if (process.env.NODE_ENV !== 'development') {
+      // Mixpanel production
+      mixpanel.init('9bd50ec09b42d4f9fa902a1f7650160d');
+    }
     mixpanel.identify();
     mixpanel.people.increment('app opened');
     mixpanel.track('app opened');
