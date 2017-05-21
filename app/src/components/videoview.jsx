@@ -29,8 +29,8 @@ class VideoView extends React.Component {
 		const video = result.videos[0];
 		const hover = this.state.hover;
 
-		const imageWidth = 168;
-		const imageHeight = 94;
+		const imageWidth = 233;
+		const imageHeight = 131;
 
 		const overlay = (
 			<div style={{

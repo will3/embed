@@ -220,7 +220,7 @@ class MainView extends React.Component {
 		const barHeight = 44;
 
 		const sliderShown = this.state.sliderShown;
-		const sliderWidth = 200;
+		const sliderWidth = 257;
 
 		const slider = sliderShown ? (
 			<div style={{
