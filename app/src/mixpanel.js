@@ -11,6 +11,9 @@ const userId = () => {
 };
 
 const mixpanelWrapper = {
+	init(token) {
+		mixpanel.init(token);
+	},
 	identify() {
 		mixpanel.identify(userId());
 	},
