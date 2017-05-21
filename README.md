@@ -13,25 +13,21 @@ Embed library
 
 - Use iframely as fallback
 - Add more tests (100s ?);
-- Auto play videos
 - Handle flash on iOS
 - Related videos
 - Search
-- Get thumb, title, and site icon
+- Mine fav icon
 
 Web App
 
-- User sessions
-- Favourites
-- Create playlists
 - Share
-- Embed split screen elsewhere
-- Analytics
+- Add embed link
+- Organize favourites
+- History
 - Show related videos
 - Search
-- History
 
 Business
 
+- Promote
 - Ads
-- Marketing
