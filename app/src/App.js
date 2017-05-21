@@ -4,7 +4,8 @@ import MainView from './components/mainview';
 import container from './container';
 import search from './api/search';
 import storage from './storage';
-import mixpanel from './mixpanel';
+
+const mixpanel = window.mixpanel;
 
 import './App.css';
 
@@ -23,7 +24,7 @@ class App extends Component {
     } else {
       mixpanel.init('9bd50ec09b42d4f9fa902a1f7650160d');
     }
-    mixpanel.identify();
+    mixpanel.identify(storage.userId);
     mixpanel.people.increment('app opened');
     mixpanel.track('app opened');
   }

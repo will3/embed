@@ -1,4 +1,5 @@
 import lscache from 'ls-cache';
+import uuid from 'uuid/v1';
 
 export default {
 	get(key) {
@@ -34,5 +35,12 @@ export default {
 		return {
 			add, remove, has, getAll
 		}
+	},
+
+	get userId() {
+		if (this.get('userId') == null) {
+			this.set('userId', uuid());
+		}
+		return this.get('userId');
 	}
 }

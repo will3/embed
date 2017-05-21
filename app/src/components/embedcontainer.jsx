@@ -2,7 +2,8 @@ import React from 'react';
 import storage from '../storage';
 import EmbedView from './embedview';
 import screenfull from 'screenfull';
-import mixpanel from '../mixpanel';
+
+const mixpanel = window.mixpanel;
 
 class EmbedContainer extends React.Component {
 

@@ -7,7 +7,8 @@ import storage from '../storage';
 import settings from '../settings';
 import Slider from './slider';
 import EmbedContainer from './embedcontainer';
-import mixpanel from '../mixpanel';
+
+const mixpanel = window.mixpanel;
 
 class MainView extends React.Component {
 	constructor(props) {
