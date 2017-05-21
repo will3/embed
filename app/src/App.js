@@ -5,7 +5,7 @@ import container from './container';
 import search from './api/search';
 import storage from './storage';
 
-const mixpanel = window.mixpanel;
+import mixpanel from './mixpanel';
 
 import './App.css';
 
@@ -19,11 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     container.app = this;
-    if (process.env.NODE_ENV === 'development') {
-      mixpanel.init("ea686ee9c008ba9506afe2b7df0898bb");
-    } else {
-      mixpanel.init('9bd50ec09b42d4f9fa902a1f7650160d');
-    }
+    
     mixpanel.identify(storage.userId);
     mixpanel.people.increment('app opened');
     mixpanel.track('app opened');

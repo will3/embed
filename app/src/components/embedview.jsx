@@ -7,7 +7,7 @@ import Input from './input';
 import EmbedBar from './embedbar';
 import container from '../container';
 
-const mixpanel = window.mixpanel;
+import mixpanel from '../mixpanel';
 
 class EmbedView extends React.Component {
 	constructor(props) {

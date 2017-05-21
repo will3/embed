@@ -8,7 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "mixpanel-browser": "^2.11.1"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "flat-cache": "^1.2.2"
