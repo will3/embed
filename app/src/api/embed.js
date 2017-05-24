@@ -1,9 +1,11 @@
 import settings from '../settings';
 import request from 'request';
 import Q from 'q';
+import qs from 'qs';
 
-const search = (url) => {
-  const path = settings.host + '/search?url=' + escape(url);
+const embed = (req) => {
+  const query = qs.stringify(req);
+  const path = settings.host + '/embed?' + query;
 
   const deferred = Q.defer();
 
@@ -19,8 +21,8 @@ const search = (url) => {
     const success = r.statusCode >= 200 && r.statusCode <= 299;
 
     if (!success) {
-      deferred.reject(new Error(d.error));
-      return;
+    	deferred.reject(new Error(d.error));
+    	return;
     }
 
     deferred.resolve(d);
@@ -29,4 +31,4 @@ const search = (url) => {
   return deferred.promise;
 };
 
-export default search;
+export default embed;

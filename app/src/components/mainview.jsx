@@ -158,15 +158,9 @@ class MainView extends React.Component {
 			</div>
 		) : null;
 
-		const host = settings.host;
-		const query = qs.stringify({
-			urls: _.map(this.state.results, function(result) {
-				return result == null ? null : result.url
-			}),
-			embed: true
+		const urls = _.map(this.state.results, function(result) {
+			return result == null ? null : result.url
 		});
-		const embedUrl = host + '?' + query;
-		const embedCode = '<iframe width="560" height="315" src="' + embedUrl + '" frameborder="0" allowfullscreen></iframe>';
 
 		const shareView = this.state.shareShown ? (
 			<div style={{
@@ -175,8 +169,7 @@ class MainView extends React.Component {
 				top: 20 + barHeight
 			}}>
 				<ShareView 
-				embedUrl={embedUrl}
-				embedCode={embedCode}/>
+				urls={urls} />
 			</div>
 		) : null;
 

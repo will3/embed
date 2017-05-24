@@ -1,5 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
+import qs from 'qs';
+
 import {
   ShareButtons,
   ShareCounts,
@@ -30,18 +32,41 @@ const OKIcon = generateShareIcon('ok');
 const TelegramIcon = generateShareIcon('telegram');
 const WhatsappIcon = generateShareIcon('whatsapp');
 
+import embedOperation from '../api/embed';
+import settings from '../settings';
+
 class ShareView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedTab: 0
+			selectedTab: 0,
+			loading: false
 		}
 	}
 
 	componentDidMount() {
-		$(this.refs.input).focus();
-		$(this.refs.input).select();
+		this.load();
 	}
+
+	load() {
+		const state = {
+			urls: this.props.urls
+		};
+
+		embedOperation({
+			full_url: JSON.stringify(state)
+		})
+		.then((result) => {
+			const id = result.id;
+			this.setState({
+				embedUrl: settings.embedHost + '#e/' + id,
+				loading: false
+			});
+
+			$(this.refs.input).focus();
+			$(this.refs.input).select();
+		});
+	};
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.selectedTab !== this.state.selectedTab) {
@@ -62,7 +87,10 @@ class ShareView extends React.Component {
 		const title = 'fourplayer';
 		const description = null;
 		const picture = null;
-		const url = this.props.embedUrl;
+		
+		const embedUrl = this.state.embedUrl;
+		const embedCode = '<iframe width="560" height="315" src="' + embedUrl + '" frameborder="0" allowfullscreen></iframe>';
+		const url = embedUrl;
 
 		const shareButtons = this.state.selectedTab === 0 ? (
 			<div style={{
@@ -123,15 +151,8 @@ class ShareView extends React.Component {
 					</div>
 			</div>) : null;
 
-		return (
-			<div style={{
-				width: width,
-				border: '1px solid #CCC',
-				backgroundColor: '#FFF',
-				paddingLeft: 12,
-				paddingRight: 12,
-				paddingTop: 12
-			}}>
+		const content = this.state.loading ? null : (
+			<div>
 				<div style={{
 					marginBottom: 15
 				}}>
@@ -160,12 +181,25 @@ class ShareView extends React.Component {
 						outline: 'none',
 						boxSizing: 'border-box'
 					}} 
-					defaultValue={this.state.selectedTab === 0 ? this.props.embedUrl : this.props.embedCode}
+					value={this.state.selectedTab === 0 ? embedUrl : embedCode}
 					ref='input' 
 					type='text'
 					spellCheck={false}>
 					</input>
 				</div>
+			</div>
+		);
+
+		return (
+			<div style={{
+				width: width,
+				border: '1px solid #CCC',
+				backgroundColor: '#FFF',
+				paddingLeft: 12,
+				paddingRight: 12,
+				paddingTop: 12
+			}}>
+				{content}
 			</div>
 		);
 	}

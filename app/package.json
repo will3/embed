@@ -16,6 +16,7 @@
     "react-dom": "^15.5.4",
     "react-share": "^1.13.2",
     "request": "^2.81.0",
+    "riot-route": "^3.1.1",
     "screenfull": "^3.2.0",
     "throttle-debounce": "^1.0.1",
     "uuid": "^3.0.1",

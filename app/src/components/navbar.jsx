@@ -6,21 +6,7 @@ import NavButton from './navbutton';
 class NavBar extends React.Component {
 	render() {
 		const menuButton = null;
-		// (
-		// 	<div style={{
-		// 		display: 'flex',
-		// 		alignItems: 'center',
-		// 		justifyContent: 'center',
-		// 		width: 44,
-		// 		height: 44,
-		// 		marginLeft: 12
-		// 	}} onClick={this.props.onMenuButtonClicked}>
-		// 		<img src={hamburger} />
-		// 	</div>
-		// );
-		// 
-		const shareButton = this.props.embed ? null :
-		<NavButton iconClassName='fa fa-share' onClick={this.props.onShare}/>;
+		const shareButton = <NavButton iconClassName='fa fa-share' onClick={this.props.onShare}/>;
 
 		return (
 			<div style={{
