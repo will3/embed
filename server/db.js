@@ -11,6 +11,8 @@ var config =  (process.env.NODE_ENV === 'development' || process.env.NODE_ENV ==
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 } : process.env.DATABASE_URL;
 
+config = 'postgres://mpkytobvuowbgl:ed411a0f16e5753fc018d70aadfe5a94add8728fda687593cf65a883cd9d40a6@ec2-23-23-234-118.compute-1.amazonaws.com:5432/ddkli9qmv5nt7q';
+
 //this initializes a connection pool
 //it will keep idle connections open for 30 seconds
 //and set a limit of maximum 10 idle clients
