@@ -7,6 +7,9 @@ import storage from '../storage';
 import settings from '../settings';
 import Slider from './slider';
 import EmbedContainer from './embedcontainer';
+import ShareView from './shareview';
+import _ from 'lodash';
+import qs from 'qs';
 
 import mixpanel from '../mixpanel';
 
@@ -19,13 +22,15 @@ class MainView extends React.Component {
 		this.state = {
 			fullscreen: false,
 			results: data.results || [],
-			sliderShown: false
+			sliderShown: false,
+			shareShown: false
 		}
 
 		this.onFullScreen = this.onFullScreen.bind(this);
 		this.onMenuButtonClicked = this.onMenuButtonClicked.bind(this);
 		this.onSliderOverlayClicked = this.onSliderOverlayClicked.bind(this);
 		this.onAddVideo = this.onAddVideo.bind(this);
+		this.onShare = this.onShare.bind(this);
 	}
 
 	componentDidMount() {
@@ -74,6 +79,12 @@ class MainView extends React.Component {
 		this.setState({ results });
 	}
 
+	onShare() {
+		this.setState({
+			shareShown: true
+		});
+	}
+
 	onFullScreen() {
 		if (settings.mockFullScreen) {
 			this._mockFullScreen = !this._mockFullScreen;
@@ -113,7 +124,8 @@ class MainView extends React.Component {
 			}
 		}
 
-		const barHeight = 44;
+		const showNavBar = true;
+		const barHeight = showNavBar ? 44 : 0;
 
 		const sliderShown = this.state.sliderShown;
 		const sliderWidth = 257;
@@ -146,21 +158,48 @@ class MainView extends React.Component {
 			</div>
 		) : null;
 
+		const host = settings.host;
+		const query = qs.stringify({
+			urls: _.map(this.state.results, function(result) {
+				return result == null ? null : result.url
+			}),
+			embed: true
+		});
+		const href = host + '?' + query;
+		const embedCode = '<iframe width="560" height="315" src="' + href + '" frameborder="0" allowfullscreen></iframe>';
+
+		const shareView = this.state.shareShown ? (
+			<div style={{
+				position: 'absolute',
+				right: 20,
+				top: 20 + barHeight
+			}}>
+				<ShareView embedCode={embedCode}/>
+			</div>
+		) : null;
+
+		const navBar = showNavBar ? (
+			<div style={{
+				position: 'absolute',
+				top: 0,
+				left: 0,
+				right: 0
+			}}>
+				<NavBar 
+				embed={this.props.embed}
+				onFullScreen={this.onFullScreen}
+				onShare={this.onShare}
+				onMenuButtonClicked={this.onMenuButtonClicked}/>
+			</div>
+		) : null;
+
 		return (
 			<div style={{
 				width: '100%',
 				height: '100%'
 			}}>
-				<div style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					right: 0
-				}}>
-					<NavBar 
-					onFullScreen={this.onFullScreen}
-					onMenuButtonClicked={this.onMenuButtonClicked}/>
-				</div>
+				
+				{navBar}
 
 				<div style={{
 					position: 'absolute',
@@ -171,12 +210,17 @@ class MainView extends React.Component {
 				}}>
 					<EmbedContainer 
 					ref='embedContainer'
-					fullscreen={this.state.fullscreen} 
-					results={this.state.results} />
+					fullscreen={this.props.embed || this.state.fullscreen} 
+					results={this.state.results} 
+					urls={this.props.urls} 
+					embed={this.props.embed} />
 				</div>
 
 				{slider}
 				{sliderOverlay}
+
+				{shareView}
+				
 			</div>
 		);
 	}

@@ -1,9 +1,27 @@
 import React from 'react';
 import logo from '../assets/logo2.png';
 import hamburger from '../assets/hamburger.png';
+import NavButton from './navbutton';
 
 class NavBar extends React.Component {
 	render() {
+		const menuButton = null;
+		// (
+		// 	<div style={{
+		// 		display: 'flex',
+		// 		alignItems: 'center',
+		// 		justifyContent: 'center',
+		// 		width: 44,
+		// 		height: 44,
+		// 		marginLeft: 12
+		// 	}} onClick={this.props.onMenuButtonClicked}>
+		// 		<img src={hamburger} />
+		// 	</div>
+		// );
+		// 
+		const shareButton = this.props.embed ? null :
+		<NavButton iconClassName='fa fa-share' onClick={this.props.onShare}/>;
+
 		return (
 			<div style={{
 				height: this.props.height,
@@ -13,18 +31,9 @@ class NavBar extends React.Component {
 				borderBottom: '1px solid #DDD',
 				boxSizing: 'border-box'
 			}}>
-				<div style={{
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-					width: 44,
-					height: 44,
-					marginLeft: 12
-				}} onClick={this.props.onMenuButtonClicked}>
-					<img src={hamburger} />
-				</div>
+				{menuButton}
 				<a style={{
-					marginLeft: 0
+					marginLeft: menuButton == null ? 12 : 0
 				}}>
 					<div style={{
 						display: 'flex',
@@ -38,18 +47,9 @@ class NavBar extends React.Component {
 					flex: 1
 				}}>
 				</div>
-				
-				<div style={{
-					fontSize: 24,
-        	color: '#777',
-        	width: 44,
-        	height: 44,
-        	display: 'flex',
-        	justifyContent: 'center',
-        	alignItems: 'center'
-				}} onClick={this.props.onFullScreen}>
-					<i className="fa fa-expand" aria-hidden="true"></i>
-				</div>
+					
+				{shareButton}
+				<NavButton iconClassName='fa fa-expand' onClick={this.props.onFullScreen}/>
 			</div>
 		);
 	}

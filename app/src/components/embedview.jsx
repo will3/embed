@@ -24,7 +24,17 @@ class EmbedView extends React.Component {
 		this.events = container.events;
 	}
 
+	componentDidMount() {
+		if (this.props.url != null && this.props.url.length > 0)	{
+			this.load(this.props.url);
+		}
+	}
+
 	onValue(value) {
+		this.load(value);
+	}
+
+	load(value) {
 		this.setState({
 			loadingResult: true
 		});
@@ -48,7 +58,7 @@ class EmbedView extends React.Component {
 			this.setState({
 				loadingResult: false
 			});
-		});		
+		});	
 	}
 
 	onClose() {
@@ -63,7 +73,16 @@ class EmbedView extends React.Component {
 		const result = this.props.result;
 
 		const embedUrl = result == null ? null : result.videos.length === 0 ? result.url : result.videos[0].url;
-		
+			
+		const topBar = (result == null || this.props.hideTopBar) ? null : (
+			<EmbedBar 
+			result={result} 
+			onClose={this.onClose} 
+			onValue={this.onValue} 
+			onStar={this.props.onStar} 
+			starred={this.props.starred}/>
+		);
+
 		const iframe = result == null ? null : (
 			<div style={{
 				position: 'absolute',
@@ -126,15 +145,6 @@ class EmbedView extends React.Component {
 				</div>
 			</div>
 		) : null;
-
-		const topBar = (result == null || this.props.hideTopBar) ? null : (
-			<EmbedBar 
-			result={result} 
-			onClose={this.onClose} 
-			onValue={this.onValue} 
-			onStar={this.props.onStar} 
-			starred={this.props.starred}/>
-		);
 
 		return (
 			<div style={{

@@ -51,6 +51,7 @@ class EmbedContainer extends React.Component {
 				screenIndex={index}
 				hideTopBar={this.props.fullscreen}
 				result={this.props.results[index]}
+				url={this.props.urls[index]}
 				onResult={ (result) => {
 					this.props.results[index] = result;
 

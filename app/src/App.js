@@ -14,6 +14,7 @@ import $ from 'jquery';
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.events = container.events;
   }
 
@@ -29,6 +30,7 @@ class App extends Component {
     const navHeight = 42;
     
     const data = storage.get('data') || {};
+    const results = this.props.urls.length > 0 ? [] : (data.results || []);
 
     return (
       <div className="App">      
@@ -41,7 +43,9 @@ class App extends Component {
         }}>
           <MainView 
           ref={ mainView => this.mainView = mainView } 
-          results={data.results || []} />
+          embed={this.props.embed}
+          urls={this.props.urls}
+          results={results} />
         </div>
 
       </div>
