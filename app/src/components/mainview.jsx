@@ -81,7 +81,7 @@ class MainView extends React.Component {
 
 	onShare() {
 		this.setState({
-			shareShown: true
+			shareShown: !this.state.shareShown
 		});
 	}
 
@@ -165,8 +165,8 @@ class MainView extends React.Component {
 			}),
 			embed: true
 		});
-		const href = host + '?' + query;
-		const embedCode = '<iframe width="560" height="315" src="' + href + '" frameborder="0" allowfullscreen></iframe>';
+		const embedUrl = host + '?' + query;
+		const embedCode = '<iframe width="560" height="315" src="' + embedUrl + '" frameborder="0" allowfullscreen></iframe>';
 
 		const shareView = this.state.shareShown ? (
 			<div style={{
@@ -174,7 +174,9 @@ class MainView extends React.Component {
 				right: 20,
 				top: 20 + barHeight
 			}}>
-				<ShareView embedCode={embedCode}/>
+				<ShareView 
+				embedUrl={embedUrl}
+				embedCode={embedCode}/>
 			</div>
 		) : null;
 
