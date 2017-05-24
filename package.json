@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && npm install && cd .. && NODE_ENV=production node server/index"
+    "start": "cd server && npm install && cd ../embed && npm install && cd .. && NODE_ENV=production node server/index"
   },
   "author": "",
   "license": "ISC",
