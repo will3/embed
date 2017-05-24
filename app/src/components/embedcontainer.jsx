@@ -84,10 +84,8 @@ class EmbedContainer extends React.Component {
 	}
 
 	renderViews() {
-		const fullscreen = this.props.fullscreen;
-
 		const indexesWithResult = [];
-		for (const i = 0; i < 4; i++) {
+		for (let i = 0; i < 4; i++) {
 			if (this.props.results[i] != null) {
 				indexesWithResult.push(i);
 			}

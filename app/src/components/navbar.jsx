@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../assets/logo2.png';
-import hamburger from '../assets/hamburger.png';
 import NavButton from './navbutton';
 
 class NavBar extends React.Component {

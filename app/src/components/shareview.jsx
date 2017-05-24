@@ -1,10 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
-import qs from 'qs';
 
 import {
   ShareButtons,
-  ShareCounts,
   generateShareIcon
 } from 'react-share';
 
@@ -83,7 +81,6 @@ class ShareView extends React.Component {
 
 	render() {
 		const width = 400;
-		const height = 44;
 		const title = 'fourplayer';
 		const description = null;
 		const picture = null;

@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from './input';
 import SmartInput from './smartinput';
 import StarButton from './starbutton';
 

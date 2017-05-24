@@ -1,6 +1,4 @@
 import React from 'react';
-import EmbedView from './embedview';
-const uuid = require('uuidv4');
 import NavBar from './navbar';
 import $ from 'jquery';
 import storage from '../storage';
@@ -9,7 +7,6 @@ import Slider from './slider';
 import EmbedContainer from './embedcontainer';
 import ShareView from './shareview';
 import _ from 'lodash';
-import qs from 'qs';
 
 import mixpanel from '../mixpanel';
 
@@ -115,15 +112,6 @@ class MainView extends React.Component {
 	}
 
 	render() {
-		let count = 0;
-		let found;
-		for (let i = 0; i < 4; i++) {
-			if (this.state.results[i] != null) {
-				count++;
-				found = i;
-			}
-		}
-
 		const showNavBar = true;
 		const barHeight = showNavBar ? 44 : 0;
 

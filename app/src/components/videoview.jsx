@@ -26,7 +26,6 @@ class VideoView extends React.Component {
 
 	render() {
 		const result = this.props.result;
-		const video = result.videos[0];
 		const hover = this.state.hover;
 
 		const imageWidth = 233;

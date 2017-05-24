@@ -1,7 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
 
-import SearchBar from './searchbar';
 import search from '../api/search';
 import Input from './input';
 import EmbedBar from './embedbar';

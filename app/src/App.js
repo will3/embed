@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import SearchBar from './components/searchbar';
 import MainView from './components/mainview';
 import container from './container';
-import search from './api/search';
 import storage from './storage';
 import embedOperation from './api/embed';
 
 import mixpanel from './mixpanel';
 
 import './App.css';
-
-import $ from 'jquery';
 
 import routes from './routes';
 
@@ -48,8 +44,6 @@ class App extends Component {
   }
 
   render() {
-    const navHeight = 42;
-    
     const data = storage.get('data') || {};
     const results = this.state.urls.length > 0 ? [] : (data.results || []);
 
