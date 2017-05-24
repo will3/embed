@@ -5,8 +5,10 @@ const heuristics = require('./heuristics');
 
 const cheerio = require('cheerio');
 const parseXml = cheerio.load;
+const getScriptStrings = require('./utils/getscriptstrings');
 
 const htmlDecode = require('js-htmlencode').htmlDecode;
+const strings = require('./utils/strings');
 
 const eachValue = (value, callback) => {
   if (value == null) {
@@ -33,6 +35,7 @@ const readBody = (body, params) => {
   let $ = parseXml(body);
 
   const meta = ogParser(body);
+
   result.title = meta.title;
 
   const og = meta.og;
@@ -179,7 +182,7 @@ const readElement = (el, selected, result) => {
     readScript(html, result);
   }
 
-  // iframe elements could be ads
+  // iframe elements could be ads // TODO look into this
   if (el.type === 'tag' && el.name === 'iframe') {
     const url = el.attribs['src'];
     if (url != null) {
@@ -221,87 +224,41 @@ const readElement = (el, selected, result) => {
 };
 
 const readString = (value, result, source) => {
-  const url = new URL(value);
+  const swf = strings.readUrl(value, 'swf');
 
-  if (url.host.length > 0) {
-    const pathname = url.pathname;
-    const ext = pathname.split('.').pop();
-
-    if (ext === 'swf') {
-      let s = _.clone(source);
-      s.parsed = true;
-      result.videos.push({
-        url: url.href,
-        source: s
-      });
-    }
+  if (swf != null) {
+    let s = _.clone(source);
+    s.parsed = true;
+    result.videos.push({
+      url: swf,
+      source: s
+    });
   }
 
-  let $ = parseXml(value);
+  const embed = strings.readEmbed(value);
 
-  // Find embed tag
-  const embed = $('embed');
-  if (embed.length > 0) {
-    const src = embed.attr('src');
-    if (src != null) {
-      let s = _.clone(source);
-      s.parsed = true;
-      const video = {
-        url: src,
-        width: embed.attr('width'),
-        height: embed.attr('height'),
-        source: s
-      };
-      result.videos.push(video);
-    }
-  }
+  if (embed != null) {
+    let s = _.clone(source);
+    s.parsed = true;
 
-  // Find iframe tag
-  const iframe = $('iframe');
-  if (iframe.length > 0) {
-    const src = iframe.attr('src');
-    if (src != null) {
-      let s = _.clone(source);
-      s.parsed = true;
-      const video = {
-        url: src,
-        width: iframe.attr('width'),
-        height: iframe.attr('height'),
-        source: s
-      };
-      result.videos.push(video);
-    }
+    embed.source = s;
+
+    result.videos.push(embed);
   }
 }
 
-const getScriptStrings = (script, callback) => {
-  const evaluateString = (string) => {
-    // Skip read if no key words 
+const readScript = (script, result) => {
+  const filter = (string) => {
     if (string.indexOf('iframe') === -1 &&
       string.indexOf('embed') === -1 &&
       string.indexOf('swf') === -1
     ) {
-      return;
+      return false;
     }
+    return true;
+  }
 
-    // Use eval to unescape string literals
-    try {
-      string = eval(string);
-      callback(string);
-    } catch (err) {}
-  };
-
-  const quotedStrings = (script.match(/"[^"\\]*(?:\\.[^"\\]*)*"/g) || []).forEach((string) => {
-    evaluateString(string);
-  });
-
-  const singleQuotedStrings = (script.match(/'[^'\\]*(?:\\.[^'\\]*)*'/g) || []).forEach((string) => {
-    evaluateString(string);
-  });
-}
-
-const readScript = (script, result) => {
-  getScriptStrings(script, (string) => {
+  getScriptStrings(script, filter).forEach((string) => {
     readString(string, result, { script: true });
   });
 }

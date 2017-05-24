@@ -19,6 +19,7 @@
     "js-htmlencode": "^0.3.0",
     "og-parser": "github:will3/og-parser",
     "request": "^2.81.0",
+    "url": "^0.11.0",
     "url-parse": "^1.1.9"
   },
   "devDependencies": {

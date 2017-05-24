@@ -9,9 +9,7 @@ const getVideoRating = (video, params) => {
   let value = 0;
 
   if (srcUrlParts != null) {
-    const a = _.without(new URL(video.url).pathname.split('/'), '');
-    const pathRating = jaccard.index(a, srcUrlParts);
-    value += pathRating;
+    value += getPathRating(video.url, srcUrlParts);
   }
 
   const url = new URL(video.url);
@@ -39,6 +37,11 @@ const getVideoRating = (video, params) => {
   return value;
 };
 
+const getPathRating = (url, srcUrlParts) => {
+  const a = _.without(new URL(url).pathname.split('/'), '');
+  return jaccard.index(a, srcUrlParts);
+}
+
 // get priority() {
 //   let value = 0;
 //   // Rules
@@ -64,5 +67,6 @@ const getVideoRating = (video, params) => {
 // }
 
 module.exports = {
-  getVideoRating
+  getVideoRating,
+  getPathRating
 };

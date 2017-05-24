@@ -15,10 +15,12 @@ module.exports = (name, link, expectedLink) => {
 
 const testLink = (name, link, params) => {
   let expectedLink;
+  let related;
   if (typeof params === 'string') {
     expectedLink = params;
   } else {
     expectedLink = params.embedLink;
+    related = params.related;
   }
 
   it(name, function(done) {
@@ -49,6 +51,17 @@ const testLink = (name, link, params) => {
 
       if (result.site_name == null) {
         console.warn('site name is missing');
+      }
+
+      if (result.images.length === 0) {
+        console.warn('no images'); 
+      }
+
+      if (related == null) {
+        throw new Error('must have related video expectation');  
+      } else if (result.related.length < related) {
+        console.log(result.related);
+        throw new Error('expected ' + related + ' related videos');
       }
 
       done();

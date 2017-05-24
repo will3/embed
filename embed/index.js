@@ -1,5 +1,6 @@
 const loadPage = require('./loadpage');
 const readBody = require('./readbody');
+const getRelatedVideos = require('./related');
 
 const embed = (url, params) => {
   params = params || {};
@@ -7,7 +8,9 @@ const embed = (url, params) => {
 
   return loadPage(url, params)
   .then(function(r) {
-    return readBody(r.body, params);
+    const result = readBody(r.body, params);
+    result.related = getRelatedVideos(r.body, url);
+    return result;
   });
 }
 
