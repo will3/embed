@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 const app = express();
 const embed = require('../embed');
 const cors = require('cors');
@@ -8,6 +9,7 @@ var pg = require('pg');
 // pg.defaults.ssl = true;
 
 app.use(cors());
+app.use(compression());
 
 const dbConfig =  (process.env.NODE_ENV === 'development' || process.env.NODE_ENV == null) ? {
   user: 'will3', //env var: PGUSER

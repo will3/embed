@@ -46,6 +46,8 @@ class ShareView extends React.Component {
 		this.load();
 	}
 
+
+
 	load() {
 		const state = {
 			urls: this.props.urls
@@ -63,6 +65,9 @@ class ShareView extends React.Component {
 
 			$(this.refs.input).focus();
 			$(this.refs.input).select();
+		})
+		.catch((err) => {
+			console.log(err);
 		});
 	};
 
@@ -84,6 +89,7 @@ class ShareView extends React.Component {
 		const title = 'fourplayer';
 		const description = null;
 		const picture = null;
+		const hashtags = [];
 		
 		const embedUrl = this.state.embedUrl;
 		const embedCode = '<iframe width="560" height="315" src="' + embedUrl + '" frameborder="0" allowfullscreen></iframe>';
@@ -100,7 +106,7 @@ class ShareView extends React.Component {
 					</div>
 
 					<div className='ShareView-button'>			
-						<TwitterShareButton url={url} title={title} via={description} hashtags={picture}>
+						<TwitterShareButton url={url} title={title} via={description} hashtags={hashtags}>
 							<TwitterIcon size={32} round />
 						</TwitterShareButton>
 					</div>

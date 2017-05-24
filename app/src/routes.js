@@ -1,4 +1,5 @@
 import route from 'riot-route';
+import URL from 'url-parse';
 import container from './container';
 
 route('e/*', function(id) {
