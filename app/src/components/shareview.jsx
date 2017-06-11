@@ -46,18 +46,12 @@ class ShareView extends React.Component {
 		this.load();
 	}
 
-
-
 	load() {
-		const state = {
-			urls: this.props.urls
-		};
-
 		embedOperation({
-			full_url: JSON.stringify(state)
+			urls: this.props.urls
 		})
 		.then((result) => {
-			const id = result.id;
+			const id = result.shortId;
 			this.setState({
 				embedUrl: settings.embedHost + '#e/' + id,
 				loading: false

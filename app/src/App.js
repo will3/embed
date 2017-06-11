@@ -33,12 +33,11 @@ class App extends Component {
 
   loadEmbed(id) {
     embedOperation({
-      id: id
+      shortId: id
     }).then((result) => {
-      const state = JSON.parse(result.full_url);
       this.setState({
         embed: true,
-        urls: state.urls
+        urls: result.urls
       });
     });
   }
