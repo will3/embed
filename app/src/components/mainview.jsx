@@ -7,6 +7,7 @@ import Slider from './slider';
 import EmbedContainer from './embedcontainer';
 import ShareView from './shareview';
 import _ from 'lodash';
+import embedOperation from '../api/embed';
 
 import mixpanel from '../mixpanel';
 
@@ -56,6 +57,27 @@ class MainView extends React.Component {
 				mixpanel.track('exit fullscreen');
       }
     });
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.shareShown && this.state.embedUrl == null) {
+			const urls = _.map(this.state.results, function(result) {
+				return result == null ? null : result.url
+			});
+
+			embedOperation({
+				urls: urls
+			})
+			.then((result) => {
+				const id = result.shortId;
+				this.setState({
+					embedUrl: settings.embedHost + '#e/' + id
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		}
 	}
 
 	componentWillUnmount() {
@@ -157,7 +179,9 @@ class MainView extends React.Component {
 				top: 20 + barHeight
 			}}>
 				<ShareView 
-				urls={urls} />
+				ref='shareView'
+				urls={urls}
+				embedUrl={this.state.embedUrl} />
 			</div>
 		) : null;
 

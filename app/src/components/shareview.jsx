@@ -43,29 +43,18 @@ class ShareView extends React.Component {
 	}
 
 	componentDidMount() {
-		this.load();
-	}
-
-	load() {
-		embedOperation({
-			urls: this.props.urls
-		})
-		.then((result) => {
-			const id = result.shortId;
-			this.setState({
-				embedUrl: settings.embedHost + '#e/' + id,
-				loading: false
-			});
-
+		if (this.props.embedUrl != null) {
 			$(this.refs.input).focus();
 			$(this.refs.input).select();
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-	};
+		}
+	}
 
 	componentDidUpdate(prevProps, prevState) {
+		if (this.props.embedUrl != null) {
+			$(this.refs.input).focus();
+			$(this.refs.input).select();
+		}
+
 		if (prevState.selectedTab !== this.state.selectedTab) {
 			$(this.refs.input).focus();
 			$(this.refs.input).select();		
@@ -85,7 +74,7 @@ class ShareView extends React.Component {
 		const picture = null;
 		const hashtags = [];
 		
-		const embedUrl = this.state.embedUrl;
+		const embedUrl = this.props.embedUrl;
 		const embedCode = '<iframe width="560" height="315" src="' + embedUrl + '" frameborder="0" allowfullscreen></iframe>';
 		const url = embedUrl;
 
@@ -181,7 +170,8 @@ class ShareView extends React.Component {
 					value={this.state.selectedTab === 0 ? embedUrl : embedCode}
 					ref='input' 
 					type='text'
-					spellCheck={false}>
+					spellCheck={false}
+					readonly>
 					</input>
 				</div>
 			</div>
