@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo2.png';
 import NavButton from './navbutton';
+import SearchBar from './searchbar';
 
 class NavBar extends React.Component {
 	render() {
@@ -27,6 +28,13 @@ class NavBar extends React.Component {
 						<img src={logo} />
 					</div>
 				</a>
+
+				<div style={{
+					marginLeft: 12,
+					width: 300
+				}}>
+					<SearchBar onSearch={this.props.onSearch}/>
+				</div>
 			
 				<div style={{
 					flex: 1

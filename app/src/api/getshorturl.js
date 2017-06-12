@@ -3,9 +3,9 @@ import request from 'request';
 import Q from 'q';
 import qs from 'qs';
 
-const embed = (req) => {
+const getShortUrl = (req) => {
   const query = qs.stringify(req);
-  const path = settings.host + '/embed?' + query;
+  const path = settings.host + '/short?' + query;
 
   const deferred = Q.defer();
 
@@ -31,4 +31,4 @@ const embed = (req) => {
   return deferred.promise;
 };
 
-export default embed;
+export default getShortUrl;

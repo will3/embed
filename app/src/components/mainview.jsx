@@ -7,9 +7,10 @@ import Slider from './slider';
 import EmbedContainer from './embedcontainer';
 import ShareView from './shareview';
 import _ from 'lodash';
-import embedOperation from '../api/embed';
-
+import createShortUrl from '../api/createshorturl';
 import mixpanel from '../mixpanel';
+import routes from '../routes';
+import SearchResultsView from './searchresultsview';
 
 class MainView extends React.Component {
 	constructor(props) {
@@ -21,7 +22,9 @@ class MainView extends React.Component {
 			fullscreen: false,
 			results: data.results || [],
 			sliderShown: false,
-			shareShown: false
+			shareShown: false,
+			embedUrl: null,
+			embedUrls: [],
 		}
 
 		this.onFullScreen = this.onFullScreen.bind(this);
@@ -29,6 +32,7 @@ class MainView extends React.Component {
 		this.onSliderOverlayClicked = this.onSliderOverlayClicked.bind(this);
 		this.onAddVideo = this.onAddVideo.bind(this);
 		this.onShare = this.onShare.bind(this);
+		this.onSearch = this.onSearch.bind(this);
 	}
 
 	componentDidMount() {
@@ -60,18 +64,20 @@ class MainView extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.shareShown && this.state.embedUrl == null) {
-			const urls = _.map(this.state.results, function(result) {
-				return result == null ? null : result.url
-			});
+		const urls = _.map(this.state.results, function(result) {
+			return result == null ? null : result.url
+		});
 
-			embedOperation({
+		if (this.state.shareShown && 
+			(this.state.embedUrl == null || !_.isEqual(this.state.embedUrls, urls))) {
+			createShortUrl({
 				urls: urls
 			})
 			.then((result) => {
 				const id = result.shortId;
 				this.setState({
-					embedUrl: settings.embedHost + '#e/' + id
+					embedUrl: settings.embedHost + '#e/' + id,
+					embedUrls: urls
 				});
 			})
 			.catch((err) => {
@@ -82,6 +88,10 @@ class MainView extends React.Component {
 
 	componentWillUnmount() {
 		$(document).off('webkitfullscreenchange mozfullscreenchange fullscreenchange');
+	}	
+
+	onSearch(value) {
+		routes.add('s?q=' + value);
 	}
 
 	onAddVideo(result) {
@@ -196,9 +206,30 @@ class MainView extends React.Component {
 				embed={this.props.embed}
 				onFullScreen={this.onFullScreen}
 				onShare={this.onShare}
-				onMenuButtonClicked={this.onMenuButtonClicked}/>
+				onMenuButtonClicked={this.onMenuButtonClicked}
+				onSearch={this.onSearch}/>
 			</div>
 		) : null;
+
+		let content;
+
+		switch(this.props.contentType) {
+			case 'embed': {
+				content = (
+					<EmbedContainer 
+					ref='embedContainer'
+					fullscreen={this.props.embed || this.state.fullscreen} 
+					results={this.state.results} 
+					urls={this.props.urls} 
+					embed={this.props.embed} /> );
+			} break;
+			case 'searchResults': {
+				content = (
+					<SearchResultsView 
+					query={this.props.query} />
+				);
+			} break;
+		}
 
 		return (
 			<div style={{
@@ -215,12 +246,7 @@ class MainView extends React.Component {
 					bottom: 0,
 					left: 0
 				}}>
-					<EmbedContainer 
-					ref='embedContainer'
-					fullscreen={this.props.embed || this.state.fullscreen} 
-					results={this.state.results} 
-					urls={this.props.urls} 
-					embed={this.props.embed} />
+					{content}
 				</div>
 
 				{slider}

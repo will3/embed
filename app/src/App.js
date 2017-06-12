@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MainView from './components/mainview';
 import container from './container';
 import storage from './storage';
-import embedOperation from './api/embed';
+import getShortUrl from './api/getshorturl';
 
 import mixpanel from './mixpanel';
 
@@ -32,13 +32,26 @@ class App extends Component {
   }
 
   loadEmbed(id) {
-    embedOperation({
+    getShortUrl({
       shortId: id
     }).then((result) => {
       this.setState({
         embed: true,
         urls: result.urls
       });
+    });
+  }
+
+  showEmbed() {
+    this.setState({
+      contentType: 'embed'
+    });
+  }
+
+  showSearchResults(query) {
+    this.setState({
+      contentType: 'searchResults',
+      query: query
     });
   }
 
@@ -59,7 +72,9 @@ class App extends Component {
           ref={ mainView => this.mainView = mainView } 
           embed={this.state.embed}
           urls={this.state.urls}
-          results={results} />
+          results={results} 
+          contentType={this.state.contentType} 
+          query={this.state.query} />
         </div>
 
       </div>

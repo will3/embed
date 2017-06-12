@@ -30,7 +30,6 @@ const OKIcon = generateShareIcon('ok');
 const TelegramIcon = generateShareIcon('telegram');
 const WhatsappIcon = generateShareIcon('whatsapp');
 
-import embedOperation from '../api/embed';
 import settings from '../settings';
 
 class ShareView extends React.Component {
@@ -66,7 +65,7 @@ class ShareView extends React.Component {
 			selectedTab: tab
 		});
 	}
-
+	
 	render() {
 		const width = 400;
 		const title = 'fourplayer';
@@ -137,6 +136,20 @@ class ShareView extends React.Component {
 					</div>
 			</div>) : null;
 
+		const input = (
+			<input 
+			style={{
+				height: 24,
+				width: '100%',
+				outline: 'none',
+				boxSizing: 'border-box'
+			}} 
+			value={this.state.selectedTab === 0 ? embedUrl : embedCode}
+			ref='input' 
+			type='text'
+			spellCheck={false}
+			onChange={this.handleChange}
+			readOnly /> );
 		const content = this.state.loading ? null : (
 			<div>
 				<div style={{
@@ -160,19 +173,7 @@ class ShareView extends React.Component {
 					marginBottom: 12
 				}}>
 					{shareButtons}
-					<input 
-					style={{
-						height: 24,
-						width: '100%',
-						outline: 'none',
-						boxSizing: 'border-box'
-					}} 
-					value={this.state.selectedTab === 0 ? embedUrl : embedCode}
-					ref='input' 
-					type='text'
-					spellCheck={false}
-					readonly>
-					</input>
+					{input}
 				</div>
 			</div>
 		);

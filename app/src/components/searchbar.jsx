@@ -28,6 +28,9 @@ class SearchBar extends React.Component {
 	}
 
 	onSearch() {
+		if (this.value == null || this.value.length === 0) {
+			return;
+		}
 		this.props.onSearch(this.value);
 	}
 
@@ -54,9 +57,9 @@ class SearchBar extends React.Component {
 				className='SearchBar-input'
         ref='input'
         type='text' 
-        placeholder='Paste a url here, e.g. https://www.youtube.com/watch?v=BBauxerc6TI' 
         onInput={this.onInput} style={{
-        	flex: 1
+        	flex: 1,
+        	padding: 4
         }}/>
         <button 
         className='SearchBar-button'
@@ -65,7 +68,7 @@ class SearchBar extends React.Component {
         	width: 32
         }}
         onClick={this.onSearch}>
-        	<i className="fa fa-link" aria-hidden="true"></i>
+        	<i className="fa fa-search" aria-hidden="true"></i>
         </button>
 			</div>
 		);

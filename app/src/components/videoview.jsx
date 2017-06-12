@@ -25,7 +25,7 @@ class VideoView extends React.Component {
 	}
 
 	render() {
-		const result = this.props.result;
+		const video = this.props.video;
 		const hover = this.state.hover;
 
 		const imageWidth = 233;
@@ -73,7 +73,7 @@ class VideoView extends React.Component {
 						height: imageHeight,
 						position: 'relative',
 						objectFit: 'cover'
-					}} src={result.images[0].url} />
+					}} src={video.images[0].url} />
 
 					{overlay}
 
@@ -84,7 +84,7 @@ class VideoView extends React.Component {
 						width: '100%',
 						overflow: 'hidden'
 					}}>
-						{result.title}
+						{video.title}
 					</div>
 				</div>
 			</div>
