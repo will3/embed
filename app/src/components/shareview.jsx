@@ -138,6 +138,7 @@ class ShareView extends React.Component {
 
 		const input = (
 			<input 
+			key={'input' + this.state.selectedTab}
 			style={{
 				height: 24,
 				width: '100%',

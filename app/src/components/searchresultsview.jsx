@@ -9,8 +9,8 @@ class SearchResultsView extends React.Component {
 			top: 10,  // Number of results (max 50) 
 			skip: 0,  // Skip first 3 result 
 			safeSearch: 'Off'
-		}, function(error, res, body){
-			
+		}, function(error, res, body) {
+			console.log(body);
 		});
 	}
 
