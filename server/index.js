@@ -8,11 +8,23 @@ app.use(cors());
 app.use(compression());
 app.use(bodyParser());
 
-require('./controllers/short')(app);
-require('./controllers/search')(app);
-
 app.use(express.static(__dirname + '/public'));
 
-const port = process.env.PORT || 3001;
-app.listen(port);
-console.log('Express server started on port %s', port);
+var MongoClient = require('mongodb').MongoClient;
+var MONGODB_URI = require('./secrets').mongoDbConnectionString;
+
+MongoClient.connect(MONGODB_URI, function(err, database) {
+  if (err) throw err;
+
+  var db = database;
+
+  var config = { db };
+
+  require('./setupdb')(db);
+  require('./controllers/short')(app, config);
+  require('./controllers/search')(app, config);
+
+  const port = process.env.PORT || 3001;
+  app.listen(port);
+  console.log('Express server started on port %s', port);
+});
