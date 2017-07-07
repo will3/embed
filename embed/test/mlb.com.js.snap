@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` mlb.com 1`] = `
+Object {
+  "description": "Marcia Gay Harden joins J.B. in the suite for Express Written Consent powered by Cisco",
+  "originalUrl": "http://m.mlb.com/video/topic/33521662/v499312583/marcia-gay-harden-joins-express-written-consent",
+  "site_name": "Major League Baseball",
+  "thumbnail": Object {
+    "url": "http://mediadownloads.mlb.com/mlbam/2015/09/25/images/mlbf_499312583_th_43.jpg",
+  },
+  "title": "
+Actress Harden visits EWC | MLB.com
+",
+  "video": Object {
+    "description": undefined,
+    "height": "224",
+    "title": undefined,
+    "url": "https://securea.mlb.com/shared/flash/video_playback/V1/R2/ObjectEmbedFrame.swf?content_id=499312583&property=mlb&width=400&height=224&topic_id=33521662&c_id=mlb&featureSet=fb&secure=true",
+    "width": "400",
+  },
+}
+`;
+
+exports[` mlb.com 2`] = `
+Object {
+  "description": "Ender Inciarte hits a line drive to center field to bring Mallex Smith around to score and give the Braves an early lead",
+  "originalUrl": "http://m.braves.mlb.com/atl/video/v817982083/cinatl-inciarte-plates-smith-on-rbi-double/?partnerId=as_atl_20160615_62794946&adbid=743228864080424961&adbpl=tw&adbpr=21436663",
+  "site_name": "Atlanta Braves",
+  "thumbnail": Object {
+    "url": "http://mediadownloads.mlb.com/mlbam/2016/06/15/images/mlbf_817982083_th_43.jpg",
+  },
+  "title": "
+Inciarte's RBI double | MLB.com
+",
+  "video": Object {
+    "description": undefined,
+    "height": "224",
+    "title": undefined,
+    "url": "https://securea.mlb.com/shared/flash/video_playback/V1/R2/ObjectEmbedFrame.swf?content_id=817982083&property=mlb&width=400&height=224&topic_id=8878972&c_id=mlb&featureSet=fb&secure=true",
+    "width": "400",
+  },
+}
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` xnxx 1`] = `
+Object {
+  "originalUrl": "http://www.xnxx.com/video-d4ltdd7/0/finally_got_to_fuck_haydee_from_high_school",
+  "site_name": undefined,
+  "thumbnail": Object {
+    "url": "http://img-hw.xvideos.com/videos/thumbs169xnxxll/d4/18/0c/d4180c1564788a6195df0c72df73458e/d4180c1564788a6195df0c72df73458e.19.jpg",
+  },
+  "title": "Finally got to fuck Haydee from High School - XNXX.COM",
+  "video": Object {
+    "description": undefined,
+    "height": "400",
+    "title": undefined,
+    "url": "http://static-hw.xvideos.com/swf/xv-player.swf?id_video=22049905",
+    "width": "510",
+  },
+}
+`;

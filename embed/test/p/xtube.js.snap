@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` xtube 1`] = `
+Object {
+  "originalUrl": "https://www.xtube.com/video-watch/ex-asian-girl-554909",
+  "site_name": undefined,
+  "title": "ex asian ***** | XTube Porn Video from moonum",
+  "video": Object {
+    "description": undefined,
+    "height": "480",
+    "title": undefined,
+    "url": "https://www.xtube.com/video-watch/embedded/ex-asian-554909?embedSize=big",
+    "width": "640",
+  },
+}
+`;

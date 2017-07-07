@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` break 1`] = `
+Object {
+  "description": "He&#39;s a tween.",
+  "originalUrl": "http://www.break.com/video/leeroy-jenkins-is-12-3105110",
+  "site_name": "Break",
+  "thumbnail": Object {
+    "url": "http://media11.break.com/dnet/media/110/105/3105110/happy-anniversary-leeroy-jenkinsdefault1-1.jpg",
+  },
+  "title": "Leeroy Jenkins Is 12! | Video | Break.com",
+  "video": Object {
+    "description": "He's a tween.",
+    "height": "350",
+    "title": " Happy Anniversary Leeroy Jenkins",
+    "url": "http://www.break.com/embed/3105110/",
+    "width": "425",
+  },
+}
+`;

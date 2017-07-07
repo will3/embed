@@ -22,6 +22,8 @@
     "url-parse": "^1.1.9"
   },
   "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-jest-snapshot": "^1.2.2",
     "flat-cache": "^1.2.2"
   }
 }

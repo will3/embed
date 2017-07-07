@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` vimeo 1`] = `
+Object {
+  "description": "Dreamy,  Day of the Dead Mexican textile animation for Husky&#039;s track Ghost. Taken from their upcoming new album Punchbuzz.  Ghost is available now - http://bit.ly/2oW45pm  Directed&hellip;",
+  "originalUrl": "https://vimeo.com/216098603",
+  "site_name": "Vimeo",
+  "thumbnail": Object {
+    "url": "https://i.vimeocdn.com/video/632985003_1280x720.jpg",
+  },
+  "title": "HUSKY - GHOST on Vimeo",
+  "video": Object {
+    "description": undefined,
+    "height": "720",
+    "title": undefined,
+    "url": "https://player.vimeo.com/video/216098603",
+    "width": "1280",
+  },
+}
+`;

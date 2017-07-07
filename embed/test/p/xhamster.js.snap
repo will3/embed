@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` xhamster 1`] = `
+Object {
+  "originalUrl": "https://xhamster.com/movies/7668106/sloppy_deepthroat.html",
+  "site_name": "xHamster",
+  "title": "Sloppy Deepthroat: Free Amateur HD Porn Video db - xHamster",
+  "video": Object {
+    "description": undefined,
+    "height": "400",
+    "title": undefined,
+    "url": "http://xhamster.com/xembed.php?video=7668106",
+    "width": "510",
+  },
+}
+`;

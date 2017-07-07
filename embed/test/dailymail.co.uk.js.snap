@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` dailymail.co.uk 1`] = `
+Object {
+  "description": "Their's was a union more unconventional than most, but after 13 years Helena Bonham Carter and Tim Burton have announced their split.",
+  "originalUrl": "http://www.dailymail.co.uk/tvshowbiz/article-2885993/A-look-unconventional-13-year-relationship-Helena-Bonham-Carter-Tim-Burton-movies-made.html#v-1467332342001",
+  "site_name": "Mail Online",
+  "thumbnail": Object {
+    "url": "http://i.dailymail.co.uk/i/pix/2014/12/24/02E5E3E00000044D-0-image-a-30_1419412376010.jpg",
+  },
+  "title": "Helena Bonham Carter and Tim Burton's relationship through the movies they made | Daily Mail Online",
+  "video": Object {
+    "description": undefined,
+    "height": "358",
+    "title": undefined,
+    "url": "http://video.dailymail.co.uk/video/1418450360/2014/12/1418450360_3958885003001_burton.mp4",
+    "width": "636",
+  },
+}
+`;
+
+exports[` dailymail.co.uk 2`] = `
+Object {
+  "description": "New evidence suggests that the downing of the Malaysian Airlines plane MH17 in July 2014 was caused by a shot from a Ukrainian fighter jet rather than a ground-to-air missile.",
+  "originalUrl": "http://www.dailymail.co.uk/news/article-3556177/Was-MH17-shot-Ukrainian-fighter-jet-BBC-documentary-claims-Boeing-777-targeted-plane.html#v-8296301435444282732",
+  "site_name": "Mail Online",
+  "thumbnail": Object {
+    "url": "http://i.dailymail.co.uk/i/pix/2016/04/24/13/337E7F7D00000578-0-image-a-16_1461502471991.jpg",
+  },
+  "title": "Was MH17 shot down by a Ukrainian fighter jet? | Daily Mail Online",
+  "video": Object {
+    "description": undefined,
+    "height": "358",
+    "title": undefined,
+    "url": "http://video.dailymail.co.uk/video/1418450360/2014/11/1418450360_3893116886001_ukraine-fake--960-x-540-.mp4",
+    "width": "636",
+  },
+}
+`;
+
+exports[` dailymail.co.uk 3`] = `
+Object {
+  "description": undefined,
+  "originalUrl": "http://www.dailymail.co.uk/video/news/video-1284607/Heart-rending-scenes-child-marriage-ceremonies-India.html",
+  "site_name": "Mail Online",
+  "thumbnail": Object {
+    "url": "http://i.dailymail.co.uk/i/pix/2016/04/20/15/335E51F700000578-0-image-a-16_1461162530457.jpg",
+  },
+  "title": "Heart-rending scenes from child marriage ceremonies in India | Daily Mail Online",
+  "video": Object {
+    "description": undefined,
+    "height": "358",
+    "title": undefined,
+    "url": "http://video.dailymail.co.uk/video/mol/2016/04/20/7859654809561119160/1024x576_7859654809561119160.mp4",
+    "width": "636",
+  },
+}
+`;
+
+exports[` dailymail.co.uk 4`] = `
+Object {
+  "description": "Their's was a union more unconventional than most, but after 13 years Helena Bonham Carter and Tim Burton have announced their split.",
+  "originalUrl": "http://www.dailymail.co.uk/tvshowbiz/article-2885993/A-look-unconventional-13-year-relationship-Helena-Bonham-Carter-Tim-Burton-movies-made.html#v-1467332342001",
+  "site_name": "Mail Online",
+  "thumbnail": Object {
+    "url": "http://i.dailymail.co.uk/i/pix/2014/12/24/02E5E3E00000044D-0-image-a-30_1419412376010.jpg",
+  },
+  "title": "Helena Bonham Carter and Tim Burton's relationship through the movies they made | Daily Mail Online",
+  "video": Object {
+    "description": undefined,
+    "height": "358",
+    "title": undefined,
+    "url": "http://video.dailymail.co.uk/video/1418450360/2014/12/1418450360_3958885003001_burton.mp4",
+    "width": "636",
+  },
+}
+`;

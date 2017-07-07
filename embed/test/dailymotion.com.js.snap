@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` dailymotion 1`] = `
+Object {
+  "description": undefined,
+  "originalUrl": "http://www.dailymotion.com/video/x5lvnhf_nick-puts-pressure-on-theresa-may-over-if-she-ll-put-taxes-up_news",
+  "site_name": "Dailymotion",
+  "thumbnail": Object {
+    "url": "https://s1-ssl.dmcdn.net/jVtBs/526x297-WF7.jpg",
+  },
+  "title": "Nick Puts Pressure On Theresa May Over If She&#039;ll Put Taxes Up - Video Dailymotion",
+  "video": Object {
+    "description": undefined,
+    "height": "360",
+    "title": undefined,
+    "url": "https://www.dailymotion.com/embed/video/x5lvnhf",
+    "width": "640",
+  },
+}
+`;

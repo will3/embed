@@ -40,8 +40,8 @@ class EmbedView extends React.Component {
 		.then((result) => {
 			result.url = value;
 			this.props.onResult(result);
-			if (result.videos.length === 0) {
-				mixpanel.track('embed no videos', {
+			if (result.video == null) {
+				mixpanel.track('embed no video', {
 					url: value,
 					screenIndex: this.props.screenIndex
 				});
@@ -70,7 +70,7 @@ class EmbedView extends React.Component {
 	render() {
 		const result = this.props.result;
 
-		const embedUrl = result == null ? null : result.videos.length === 0 ? result.url : result.videos[0].url;
+		const embedUrl = result == null ? null : result.video == null ? result.url : result.video.url;
 			
 		const topBar = (result == null || this.props.hideTopBar) ? null : (
 			<EmbedBar 

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` pornhub 1`] = `
+Object {
+  "description": undefined,
+  "originalUrl": "https://www.pornhub.com/view_video.php?viewkey=ph58cccc07d4dbe",
+  "site_name": "pornhub",
+  "thumbnail": Object {
+    "url": "https://bi.phncdn.com/videos/201703/18/110022832/original/(m=eGcE8daaaa)12.jpg",
+  },
+  "title": "Big Titty Girlfriend Fucked Rough And Creampied - Pornhub.com",
+  "video": Object {
+    "description": undefined,
+    "height": "360",
+    "title": undefined,
+    "url": "https://www.pornhub.com/embed/ph58cccc07d4dbe",
+    "width": "640",
+  },
+}
+`;

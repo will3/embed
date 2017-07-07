@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` youtube 1`] = `
+Object {
+  "description": "South Park - Elon Musk Tesla D (South Park HandiCar) Elon Musk speaks to the media moments after breaking ground on a new commercial launch site in Brownsvil...",
+  "originalUrl": "https://www.youtube.com/watch?v=BBauxerc6TI",
+  "site_name": "YouTube",
+  "thumbnail": Object {
+    "url": "https://i.ytimg.com/vi/BBauxerc6TI/hqdefault.jpg",
+  },
+  "title": "Elon Musk FUNNIEST moments - YouTube",
+  "video": Object {
+    "description": undefined,
+    "height": "360",
+    "title": undefined,
+    "url": "https://www.youtube.com/embed/BBauxerc6TI",
+    "width": "640",
+  },
+}
+`;

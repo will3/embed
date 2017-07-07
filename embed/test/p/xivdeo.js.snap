@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` xvideos 1`] = `
+Object {
+  "originalUrl": "https://www.xvideos.com/video27713419/follan_fuerte_en_el_cuarto_de_ropa",
+  "site_name": undefined,
+  "thumbnail": Object {
+    "url": "http://img-l3.xvideos.com/videos/thumbs169ll/3b/09/9f/3b099fa02aaf51cdea1cb8654391e526/3b099fa02aaf51cdea1cb8654391e526.23.jpg",
+  },
+  "title": "FOLLAN FUERTE EN EL CUARTO DE ROPA - XVIDEOS.COM",
+  "video": Object {
+    "description": undefined,
+    "height": "400",
+    "title": undefined,
+    "url": "https://static-hw.xvideos.com/swf/xv-player.swf?id_video=27713419",
+    "width": "510",
+  },
+}
+`;

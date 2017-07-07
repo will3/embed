@@ -39,30 +39,6 @@ const getVideoRating = (video, params) => {
   return value;
 };
 
-// get priority() {
-//   let value = 0;
-//   // Rules
-//   if (this.source.element === 'meta') {
-//     value += 100;
-//   }
-//   if (this.source.twitterPlayer) {
-//     value += 50;
-//   }
-//   if (this.source.element === 'input') {
-//     value += 10;
-//   }
-//   if (this.source.automation) {
-//     value += 10;
-//   }
-//   // Qualitative
-//   if (this.width > 0 && this.height > 0) {
-//     value += 1;
-//   }
-//   // Heuristics
-//   value += this.pathSimilarity;
-//   return value;
-// }
-
 module.exports = {
   getVideoRating
 };

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` twitch 1`] = `
+Object {
+  "description": undefined,
+  "originalUrl": "https://www.twitch.tv/speedgaming",
+  "site_name": "Twitch",
+  "thumbnail": Object {
+    "url": "https://static-cdn.jtvnw.net/jtv_user_pictures/speedgaming-profile_image-b15b320868ba3342-300x300.png",
+  },
+  "title": "Twitch",
+  "video": Object {
+    "description": undefined,
+    "height": 0,
+    "title": undefined,
+    "url": "http://player.twitch.tv/?channel=speedgaming&player=facebook&autoplay=true",
+    "width": 0,
+  },
+}
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` funnyordie.com 1`] = `
+Object {
+  "description": "Gad Elmaleh Struggles with a U.S. Customs and Border Patrol officer (Ron Livingston), giving the Moroccan born comedian his first taste of The United States Of America.",
+  "originalUrl": "http://www.funnyordie.com/videos/e52bef28f8/welcome-to-america-with-gad-elmaleh-and-ron-livingston",
+  "site_name": "Funny Or Die",
+  "thumbnail": Object {
+    "url": "http://p.fod4.com/p/media/e52bef28f8/rmnUDIy6Qbm7W40FPn0L_GAD-Thumb.jpg",
+  },
+  "title": "Welcome To America with Gad Elmaleh and Ron Livingston from Funny Or Die, Ron Livingsto...",
+  "video": Object {
+    "description": undefined,
+    "height": "400",
+    "title": undefined,
+    "url": "//www.funnyordie.com/embed/e52bef28f8",
+    "width": "640",
+  },
+}
+`;

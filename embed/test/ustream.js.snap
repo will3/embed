@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` ustream 1`] = `
+Object {
+  "description": undefined,
+  "originalUrl": "http://www.ustream.tv/recorded/88992305",
+  "site_name": "Ustream",
+  "thumbnail": Object {
+    "url": "http://static-cdn2.ustream.tv/i/video/picture/0/1/88/88992/88992305/1_22325281_88992305,640x360,b,1:2.jpg",
+  },
+  "title": "プレーヤーの埋め込み, Ustreamプレーヤーを他のサイトに埋め込み、視聴することができます。埋め込みコードをコピー/ペースト。これだけで簡単に設定できます。 halfwilldo. 技術...",
+  "video": Object {
+    "description": undefined,
+    "height": "271",
+    "title": undefined,
+    "url": "https://www.ustream.tv/embed/recorded/88992305?html5ui",
+    "width": "435",
+  },
+}
+`;

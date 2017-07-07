@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` youku 1`] = `
+Object {
+  "originalUrl": "http://v.youku.com/v_show/id_XMjcyMTA3MjM5Ng",
+  "site_name": undefined,
+  "title": "御姐归来 01—在线播放—《御姐归来》—电视剧—优酷网，视频高清在线观看",
+  "video": Object {
+    "description": undefined,
+    "height": "498",
+    "title": undefined,
+    "url": "http://player.youku.com/embed/XMjcyMTA3MjM5Ng==",
+    "width": "510",
+  },
+}
+`;

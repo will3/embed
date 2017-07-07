@@ -18,11 +18,10 @@ class EmbedContainer extends React.Component {
 		if (result == null) {
 			return null;
 		}
-		const video = result.videos[0];
-		if (video == null) {
+		if (result.video == null) {
 			return null;
 		}
-		return video.url;
+		return result.video.url;
 	}
 
 	renderView(index, left, top, width, height) {

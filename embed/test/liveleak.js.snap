@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` liveleak 1`] = `
+Object {
+  "originalUrl": "https://www.liveleak.com/view?i=6eb_1494537998",
+  "site_name": undefined,
+  "thumbnail": Object {
+    "url": "https://cdn.liveleak.com/80281E/ll_a_u/thumbs/2017/May/11/f65056ccdf60_sf_2.jpg",
+  },
+  "title": "LiveLeak.com - Hey, here's an idea, why don't we give a gun to a little girl!",
+  "video": Object {
+    "description": undefined,
+    "height": "360",
+    "title": undefined,
+    "url": "https://www.liveleak.com/ll_embed?f=f65056ccdf60",
+    "width": "640",
+  },
+}
+`;

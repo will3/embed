@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` metacafe 1`] = `
+Object {
+  "description": "She threatens to jump off this bridge if her boyfriend won't let her go through his phone.",
+  "originalUrl": "http://www.metacafe.com/watch/11506159/crazy-chick-let-me-see-your-phone-or-i-ll-jump",
+  "site_name": "Metacafe",
+  "thumbnail": Object {
+    "url": "http://cdn.metacafe.com/contents/videos_screenshots/11506000/11506159/preview.jpg",
+  },
+  "title": "
+							Crazy Chick Let Me See Your Phone or I ll Jump
+			",
+  "video": Object {
+    "description": undefined,
+    "height": "315",
+    "title": undefined,
+    "url": "http://www.metacafe.com/embed/11506159/crazy-chick-let-me-see-your-phone-or-i-ll-jump/",
+    "width": "560",
+  },
+}
+`;

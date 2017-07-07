@@ -30,14 +30,12 @@ module.exports = function(url, params) {
   } else {
     const res = requestCache.get(url);
     if (res == null) {
-      console.log('no cache..');
       return _loadPage(url).then((res) => {
         requestCache.set(url, res);
         console.log('set cache for ', url);
         return res;
       });
     } else {
-      console.log('load cache for ', url);
       return Promise.resolve(res);
     }
   }

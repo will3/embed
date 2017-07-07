@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` my.tv.sohu.com 1`] = `
+Object {
+  "originalUrl": "http://my.tv.sohu.com/us/100569193/88655884.shtml",
+  "site_name": "�Ѻ���Ƶ",
+  "thumbnail": Object {
+    "url": "http://225.img.pp.sohu.com.cn/p225/2017/4/17/13/29/6_15c5f720ef6g104SysCutcloud_88655884_7_1.jpg",
+  },
+  "title": "���� �ջ� ������Ů���� ��Ů�Ըж�ȹ���� (37)-�赸��Ƶ-�Ѻ���Ƶ",
+  "video": Object {
+    "description": undefined,
+    "height": 0,
+    "title": undefined,
+    "url": "http://tv.sohu.com/upload/swf/20121030/PlayerShell.swf?autoplay=true&topBar=1&shareBtn=1&likeBtn=1&topBar=1&sogouBtn=0&id=88655884",
+    "width": 0,
+  },
+}
+`;
+
+exports[` tv.sohu.com 1`] = `
+Object {
+  "originalUrl": "http://tv.sohu.com/20151224/n432381576.shtml",
+  "site_name": "�Ѻ���Ƶ",
+  "thumbnail": Object {
+    "url": "http://photocdn.sohu.com/20151224/vrsb82556909.jpg",
+  },
+  "title": "���������������μ��ˡ�20151223 �������ش� ����Σ����ɨ�� - �Ѻ���Ƶ",
+  "video": Object {
+    "description": undefined,
+    "height": 0,
+    "title": undefined,
+    "url": "http://share.vrs.sohu.com/2798175/v.swf&autoplay=false",
+    "width": 0,
+  },
+}
+`;

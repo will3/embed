@@ -1,6 +1,21 @@
 const embed = require('../../index');
 const util = require('util');
 const requestCache = require('./requestCache');
+const chai = require('chai');
+const expect = chai.expect;
+const chaiJestSnapshot = require('chai-jest-snapshot');
+chai.use(chaiJestSnapshot);
+
+// To refresh all snapshots
+// CHAI_JEST_SNAPSHOT_UPDATE_ALL=true npm test
+
+before(function() {
+  chaiJestSnapshot.resetSnapshotRegistry();
+});
+ 
+beforeEach(function() {
+  chaiJestSnapshot.configureUsingMochaContext(this);
+});
 
 module.exports = (name, link, expectedLink) => {
   if (Array.isArray(link)) {
@@ -13,49 +28,20 @@ module.exports = (name, link, expectedLink) => {
   testLink(name, link, expectedLink);
 };
 
-const testLink = (name, link, params) => {
-  let expectedLink;
-  if (typeof params === 'string') {
-    expectedLink = params;
-  } else {
-    expectedLink = params.embedLink;
-  }
-
+const testLink = (name, link, result) => {
   it(name, function(done) {
     this.timeout(20000);
 
     let _result;
     embed(link, {
       requestCache: requestCache
-    }).then(function(result) {
-      _result = result;
-      if (result.videos.length === 0) {
-        throw new Error('no way to embed ' + link);
-      }
-
-      if (expectedLink !== undefined) {
-        if (expectedLink !== result.videos[0].url) {
-          throw new Error('expected first link: ' + expectedLink + ' actual: ' + result.videos[0].url);
-        }
-
-        if (result.videos[1] != null && result.videos[0].rating === result.videos[1].rating && result.videos[0].url !== result.videos[1].url) {
-          throw new Error('second choice has the same rating as expected link: ' + expectedLink);
-        }
-      }
-
-      if (result.title == null) {
-        throw new Error('title is missing');
-      }
-
-      if (result.site_name == null) {
-        console.warn('site name is missing');
-      }
-
+    }).then(function(r) {
+      _result = r;
+      expect(r).to.matchSnapshot();
       done();
     }).catch(function(err) {
       setTimeout(function() {
-        err.message = link + '\n' + err.message;
-        console.log(util.inspect(_result, false, 4));
+        console.log(util.inspect(_result, { depth: null }));
         throw err;
       });
     });
