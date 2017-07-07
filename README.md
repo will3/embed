@@ -6,6 +6,8 @@
 - Watch any video, from anywhere, together, in split screen
 - Save videos automatically
 - Save split screen layouts
+- Share
+- Add embed link
 
 ### TODO
 
@@ -20,8 +22,6 @@ Embed library
 
 Web App
 
-- Share
-- Add embed link
 - Organize favourites
 - History
 - Show related videos
