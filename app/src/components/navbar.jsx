@@ -8,6 +8,13 @@ class NavBar extends React.Component {
 		const menuButton = null;
 		const shareButton = <NavButton iconClassName='fa fa-share' onClick={this.props.onShare}/>;
 
+		// <div style={{
+		// 	marginLeft: 12,
+		// 	width: 300
+		// }}>
+		// 	<SearchBar onSearch={this.props.onSearch}/>
+		// </div>
+				
 		return (
 			<div style={{
 				height: this.props.height,
@@ -28,13 +35,6 @@ class NavBar extends React.Component {
 						<img src={logo} />
 					</div>
 				</a>
-
-				<div style={{
-					marginLeft: 12,
-					width: 300
-				}}>
-					<SearchBar onSearch={this.props.onSearch}/>
-				</div>
 			
 				<div style={{
 					flex: 1
