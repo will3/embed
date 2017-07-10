@@ -71371,6 +71371,13 @@
 				var menuButton = null;
 				var shareButton = _react2.default.createElement(_navbutton2.default, { iconClassName: 'fa fa-share', onClick: this.props.onShare });
 	
+				// <div style={{
+				// 	marginLeft: 12,
+				// 	width: 300
+				// }}>
+				// 	<SearchBar onSearch={this.props.onSearch}/>
+				// </div>
+	
 				return _react2.default.createElement(
 					'div',
 					{ style: {
@@ -71395,14 +71402,6 @@
 								} },
 							_react2.default.createElement('img', { src: _logo2.default })
 						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ style: {
-								marginLeft: 12,
-								width: 300
-							} },
-						_react2.default.createElement(_searchbar2.default, { onSearch: this.props.onSearch })
 					),
 					_react2.default.createElement('div', { style: {
 							flex: 1
@@ -127497,4 +127496,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.0bd50ba1.js.map
+//# sourceMappingURL=main.8e64e6d3.js.map
