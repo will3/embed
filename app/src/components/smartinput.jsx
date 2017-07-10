@@ -69,7 +69,9 @@ class SmartInput extends React.Component {
 					fontSize: 12,
 					visibility: showLabel > 0 ? 'visible' : 'hidden',
 					display: 'flex',
-					alignItems: 'center'
+					alignItems: 'center',
+					whiteSpace: 'nowrap',
+					overflow: 'hidden'
 				}} onClick={this.onLabelClick}>
 					<div>
 						{label}
