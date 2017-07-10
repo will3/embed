@@ -1,4 +1,6 @@
-require('dotenv').config()
+require('dotenv').config();
+
+console.log(process.env.MONGODB_URI);
 
 const express = require('express');
 const compression = require('compression');
