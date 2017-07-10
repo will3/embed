@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const compression = require('compression');
 const app = express();
@@ -11,7 +13,7 @@ app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
 var MongoClient = require('mongodb').MongoClient;
-var MONGODB_URI = require('./secrets').mongoDbConnectionString;
+var MONGODB_URI = process.env.MONGODB_URI;
 
 MongoClient.connect(MONGODB_URI, function(err, database) {
   if (err) throw err;

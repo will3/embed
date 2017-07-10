@@ -12,6 +12,7 @@
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "mongodb": "^2.2.29",
     "pg": "6.x",
