@@ -16,6 +16,8 @@ class MainView extends React.Component {
 	constructor(props) {
 		super(props);
 
+		storage.set('data', {});
+
 		const data = storage.get('data') || {};
 
 		this.state = {
